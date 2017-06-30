@@ -4,15 +4,16 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi there, I am Yashvardhan Didwania. I am currently in  my sophomore year in the Electrical Engineering Department  here at IIT Bombay.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I intend to use this page to maintain a blog about 
+my projects and academic as well as non academic goals.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I used to enjoy Coding since I was introduced to it. I am interested in Software Development and want to start contributung to Open Source projects soon.
 
+Coming to IIT Bombay has given me a lot of exposure to the Programming World in general and a chance to learn new things everyday.I have also worked on quite a few [projects][projects].
 
-[jekyll-organization]: https://github.com/jekyll
+I am currently a member of [The Web n Coding Club][WnCC] of IIT Bombay where we help those who want to get started on Code.
+
+[projects]: /projects
+[WnCC]: http://wncc-iitb.org
