@@ -24,8 +24,9 @@ github_username: ydidwania
 
 # Build settings
 markdown: kramdown
-gems:
+plugins:
   - jekyll-feed
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
