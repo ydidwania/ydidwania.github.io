@@ -8,7 +8,7 @@ Hi there! I am Yashvardhan Didwania. I am currently in my sophomore year in the 
 I intend to use this page to maintain a blog about 
 my projects and academic as well as non academic goals.
 
-I have loved codingg since I was introduced to it. I have actively been involved in software development. I have been contributing to Mozilla for the past few months now. You can take a look at my [Github][github] profile to know more.
+I have enjoyed coding since I was introduced to it. I started contributing to Mozilla since September last year and have been going strong for the past few months now. You can take a look at my [Github][github] profile to know more.
 
 I am currently the manager of [The Web and Coding Club][WnCC] of IIT Bombay where we help those who want to get started with code.
 
