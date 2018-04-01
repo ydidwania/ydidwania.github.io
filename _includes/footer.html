@@ -11,7 +11,7 @@
             {% if site.author %}
               {{ site.author | escape }}
             {% else %}
-              {{ site.title | escape }}
+              {{ site.github_username | escape }}
             {% endif %}
             </li>
             {% if site.email %}
