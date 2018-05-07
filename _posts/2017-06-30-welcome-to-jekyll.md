@@ -1,25 +1,36 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2017-06-30 13:45:53 +0530
-categories: jekyll update
+title:  "GSoC Selection"
+date:   2018-05-01 13:45:53 +0530
+
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for [Google Summer of Code 2018][gsoc] with Mozilla has been accepted. Here I will write about how I started contributing to Mozilla and open source in general and then a bit on my project and what's ahead for the summers.
 
-Jekyll also offers powerful support for code snippets:
+# A Little Prep 
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+The title of my project is Improved Taskcluster Pulse Backend. I will be working within Taskcluster team to
+rewrite tascluster-events. Pulse is a system to exchange messages, giving more visibility to Mozilla's tools and allowing for more dynamic and informative tools. It follows a publisher-subscriber pattern whereby a publisher can send messages to a topic exchange and consumers can create queues to bind to thses exchanges. 
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+Each message is published with a routing key. The structure is something similar to different threads in a subreddit. Subscribers can specify which exhange and route they want to subscribe to. All if this is managed by a RabbitMQ server at `pulse.mozilla.org`
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
+
+# What will I be doing?
+
+Communication becomes more and more important as the project becomes larger. The web-client is a tool to verify that messages being published are being handled correctly to their specified route, and they end up in receiver queues.
+
+Coming back to taskcluster-events. It is a service for web clients to listen to pulse messages. RabbitMQ uses AMQP and connections from browsers are usually tcp, making it harder for web clients to directly use RabbitMQ.
+Tascluster-events solves the problem by using Websockets, and creating RabbitMQ queue for each Websocket connection and pushes messages from the queue to the websocket. It is old and poorly designed. My job will be to completely rebuild taskcluster-events from scratch, ensuring it is robust and free of major bugs or failures.
+
+I am fortunate to have Jonas Finnemann Jensen (irc: jonasfj) as my mentor for this project. Lots to learn from him. The finer details about the project can be found in my proposal [here][proposal]
+
+The RFC for this is [here][rfc]
+
+
+
+
+
+[gsoc]: https://summerofcode.withgoogle.com/
+[proposal]:   https://drive.google.com/file/d/1egLVTK9WHlgGaYQfeFiUHMSAnAoLjFTF/view?usp=sharing
+[rfc]:https://github.com/taskcluster/taskcluster-rfcs/pull/104

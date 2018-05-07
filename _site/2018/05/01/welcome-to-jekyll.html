@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Yashvardhan-Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>Yashvardhan-GSoC Selection</title>
+  <meta name="description" content="This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for Google Summer of Code 2018 with Mozill...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/update/2017/06/30/welcome-to-jekyll.html">
+  <link rel="canonical" href="http://localhost:4000/2018/05/01/welcome-to-jekyll.html">
   <link rel="alternate" type="application/rss+xml" title="Yashvardhan Didwania" href="/feed.xml">
   <link rel="icon" href="http://localhost:4000/favicon.ico" />
 
@@ -81,29 +81,35 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Welcome to Jekyll!</h1>
+    <h1 class="post-title" itemprop="name headline">GSoC Selection</h1>
     <p class="post-meta">
-      <time datetime="2017-06-30T13:45:53+05:30" itemprop="datePublished">
+      <time datetime="2018-05-01T13:45:53+05:30" itemprop="datePublished">
         
-        Jun 30, 2017
+        May 1, 2018
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+    <p>This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for <a href="https://summerofcode.withgoogle.com/">Google Summer of Code 2018</a> with Mozilla has been accepted. Here I will write about how I started contributing to Mozilla and open source in general and then a bit on my project and what’s ahead for the summers.</p>
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<h1 id="a-little-prep">A Little Prep</h1>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<p>The title of my project is Improved Taskcluster Pulse Backend. I will be working within Taskcluster team to
+rewrite tascluster-events. Pulse is a system to exchange messages, giving more visibility to Mozilla’s tools and allowing for more dynamic and informative tools. It follows a publisher-subscriber pattern whereby a publisher can send messages to a topic exchange and consumers can create queues to bind to thses exchanges.</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<p>Each message is published with a routing key. The structure is something similar to different threads in a subreddit. Subscribers can specify which exhange and route they want to subscribe to. All if this is managed by a RabbitMQ server at <code class="highlighter-rouge">pulse.mozilla.org</code></p>
 
-<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<h1 id="what-will-i-be-doing">What will I be doing?</h1>
+
+<p>Communication becomes more and more important as the project becomes larger. The web-client is a tool to verify that messages being published are being handled correctly to their specified route, and they end up in receiver queues.</p>
+
+<p>Coming back to taskcluster-events. It is a service for web clients to listen to pulse messages. RabbitMQ uses AMQP and connections from browsers are usually tcp, making it harder for web clients to directly use RabbitMQ.
+Tascluster-events solves the problem by using Websockets, and creating RabbitMQ queue for each Websocket connection and pushes messages from the queue to the websocket. It is old and poorly designed. My job will be to completely rebuild taskcluster-events from scratch, ensuring it is robust and free of major bugs or failures.</p>
+
+<p>I am fortunate to have Jonas Finnemann Jensen (irc: jonasfj) as my mentor for this project. Lots to learn from him. The finer details about the project can be found in my proposal <a href="https://drive.google.com/file/d/1egLVTK9WHlgGaYQfeFiUHMSAnAoLjFTF/view?usp=sharing">here</a></p>
+
+<p>The RFC for this is <a href="https://github.com/taskcluster/taskcluster-rfcs/pull/104">here</a></p>
 
 
   </div>
