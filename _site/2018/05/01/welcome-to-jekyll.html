@@ -8,7 +8,7 @@
 
   
   <title>Yashvardhan-GSoC Selection</title>
-  <meta name="description" content="This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for Google Summer of Code 2018 with Mozill...">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2018/05/01/welcome-to-jekyll.html">
@@ -91,25 +91,29 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for <a href="https://summerofcode.withgoogle.com/">Google Summer of Code 2018</a> with Mozilla has been accepted. Here I will write about how I started contributing to Mozilla and open source in general and then a bit on my project and what’s ahead for the summers.</p>
+    <p><img src="http://localhost:4000/assets/gsoc_cover.png" alt="gsoc" title="Google Summer of Code" class="center-image" /></p>
 
-<h1 id="a-little-prep">A Little Prep</h1>
+<p>This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for <a href="https://summerofcode.withgoogle.com/">Google Summer of Code 2018</a> with Mozilla has been accepted. Here I will write about how I started contributing to Mozilla and open source in general and then a bit on my project and what’s ahead for the summers.</p>
 
-<p>The title of my project is Improved Taskcluster Pulse Backend. I will be working within Taskcluster team to
-rewrite tascluster-events. Pulse is a system to exchange messages, giving more visibility to Mozilla’s tools and allowing for more dynamic and informative tools. It follows a publisher-subscriber pattern whereby a publisher can send messages to a topic exchange and consumers can create queues to bind to thses exchanges.</p>
+<h2 id="a-little-prep">A Little Prep</h2>
 
-<p>Each message is published with a routing key. The structure is something similar to different threads in a subreddit. Subscribers can specify which exhange and route they want to subscribe to. All if this is managed by a RabbitMQ server at <code class="highlighter-rouge">pulse.mozilla.org</code></p>
+<p>The title of my project is <strong>Improved Taskcluster Pulse Backend</strong>. I will be working within <a href="https://docs.taskcluster.net/">Taskcluster</a> team to
+rewrite tascluster-events. <a href="https://wiki.mozilla.org/Auto-tools/Projects/Pulse">Pulse</a> is a system to exchange messages, giving more visibility to Mozilla’s tools and allowing for more dynamic and informative tools. It follows a publisher-subscriber pattern whereby a publisher can send messages to a topic exchange and consumers can create queues to bind to thses exchanges.</p>
 
-<h1 id="what-will-i-be-doing">What will I be doing?</h1>
+<p>Each message is published with a routing key. The structure is something similar to different threads in a subreddit. Subscribers can specify which exhange and route they want to subscribe to. All if this is managed by a <a href="https://www.rabbitmq.com/">RabbitMQ</a> server at <code class="highlighter-rouge">pulse.mozilla.org</code></p>
 
-<p>Communication becomes more and more important as the project becomes larger. The web-client is a tool to verify that messages being published are being handled correctly to their specified route, and they end up in receiver queues.</p>
+<h2 id="what-will-i-be-doing">What will I be doing?</h2>
 
-<p>Coming back to taskcluster-events. It is a service for web clients to listen to pulse messages. RabbitMQ uses AMQP and connections from browsers are usually tcp, making it harder for web clients to directly use RabbitMQ.
+<p>Communication becomes more and more important as the project becomes larger. The web-client, <a href="https://tools.taskcluster.net/pulse-inspector">Pulse Inspector</a> is a tool to verify that messages being published are being handled correctly to their specified route, and they end up in receiver queues.</p>
+
+<p>Coming back to taskcluster-events. It is a service for web clients to listen to pulse messages. <strong>RabbitMQ uses <a href="https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol">AMQP</a></strong> and connections from browsers are usually <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">tcp</a>, making it harder for web clients to directly use RabbitMQ.
 Tascluster-events solves the problem by using Websockets, and creating RabbitMQ queue for each Websocket connection and pushes messages from the queue to the websocket. It is old and poorly designed. My job will be to completely rebuild taskcluster-events from scratch, ensuring it is robust and free of major bugs or failures.</p>
 
-<p>I am fortunate to have Jonas Finnemann Jensen (irc: jonasfj) as my mentor for this project. Lots to learn from him. The finer details about the project can be found in my proposal <a href="https://drive.google.com/file/d/1egLVTK9WHlgGaYQfeFiUHMSAnAoLjFTF/view?usp=sharing">here</a></p>
+<p>I am fortunate to have <strong>Jonas Finnemann Jensen</strong> (irc: <a href="https://mozillians.org/en-US/u/jonasfj/">jonasfj</a>) as my mentor for this project. Lots to learn from him. The finer details about the project can be found in my proposal <a href="https://drive.google.com/file/d/1egLVTK9WHlgGaYQfeFiUHMSAnAoLjFTF/view?usp=sharing">here</a></p>
 
 <p>The RFC for this is <a href="https://github.com/taskcluster/taskcluster-rfcs/pull/104">here</a></p>
+
+<h2 id="plan-for-ahead">Plan for Ahead</h2>
 
 
   </div>
