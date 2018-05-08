@@ -30,6 +30,7 @@ The RFC for this is [here][rfc]
 
 ## Plan for Ahead
 
+Well, vacations always start with a lot of plans in mind. I will have to go over my proposal again, owing to the recently concluded end semester exams. I aim to be proficient in javascript by the end of it. Coding phase begins next week, but I want to have my environment and repository ready before that. This blog will primarily be used to document any progress I make on my project, making it easier to revisit in the future. Looking forward to an exciting summer and ahead !!
 
 
 
