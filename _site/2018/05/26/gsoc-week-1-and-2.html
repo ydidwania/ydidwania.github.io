@@ -93,6 +93,8 @@
   <div class="post-content" itemprop="articleBody">
     <p>These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one.I started watching Star Wars back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.</p>
 
+<p><img src="http://localhost:4000/assets/star-wars.jpg" alt="star-wars" title="Star Wars" class="center-image" /></p>
+
 <h2 id="major-changes">Major Changes</h2>
 
 <p>In the first chat I had with Jonas, post selection, he told me about this new technology, Server Sent Events, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it.) in a lot of places. The Mozilla Developer Network had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge dont support it as yet, but there are <a href="https://github.com/Yaffle/EventSource">polyfills</a> for that, so all good.</p>
@@ -130,6 +132,8 @@ id: &lt;AMQP-message-id&gt; \n
 <h2 id="alternatives-in-the-past">Alternatives in the past</h2>
 
 <p>The most widely used alternative were Websockets. Historically, the way to receive information is to ask for it, and this is called Polling. A slight variant is Long Polling in which the server holds the request until it has new data to send. However it has several issues like high latency and overloading the server. I found the image below immmensely helpful and also the blogs <a href="https://streamdata.io/blog/server-sent-events/">here</a> and <a href="https://www.smashingmagazine.com/2018/02/sse-websockets-data-flow-http2/">here</a>.</p>
+
+<p><img src="http://localhost:4000/assets/sse.png" alt="sse" title="SS" class="center-image" /></p>
 
 <h2 id="what-have-i-done-">What have I done ?</h2>
 
