@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <title>Yashvardhan-GSoC Week 1 and 2 : A New Beginning</title>
+  <meta name="description" content="These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one.I started watching Star Wars back ...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2018/05/26/gsoc-week-1-and-2.html">
+  <link rel="alternate" type="application/rss+xml" title="Yashvardhan Didwania" href="/feed.xml">
+  <link rel="icon" href="http://localhost:4000/favicon.ico" />
+
+
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Yashvardhan Didwania</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/blog/">Blog</a>
+            
+          
+            
+            
+            <a class="page-link" href="/">About</a>
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/projects">Projects</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">GSoC Week 1 and 2 : A New Beginning</h1>
+    <p class="post-meta">
+      <time datetime="2018-05-26T09:00:00+05:30" itemprop="datePublished">
+        
+        May 26, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one.I started watching Star Wars back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.</p>
+
+<h2 id="major-changes">Major Changes</h2>
+
+<p>In the first chat I had with Jonas, post selection, he told me about this new technology, Server Sent Events, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it.) in a lot of places. The Mozilla Developer Network had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge dont support it as yet, but there are <a href="https://github.com/Yaffle/EventSource">polyfills</a> for that, so all good.</p>
+
+<p>After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, I am sure it will take another blogpost to do justice. This trims down my project even further, which means we can get to <code class="highlighter-rouge">taskcluster-github</code> or r14y bugs faster :)</p>
+
+<h2 id="server-sent-events">Server Sent Events</h2>
+
+<p>As the name suggests, it is speifically designed for the purpose of sending notifications / messagges from the server. The server maintains an event stream which is nothing more than a simple text stream over an http connection. It is essentially a one way channel flowing from server to client only, unlike Websockets where two way commmunication is possible. The downside is that the connection has to be kept open for as long as you want to receive messages. The docs here. Each message has four fields, <code class="highlighter-rouge">event</code>, <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">data</code>, <code class="highlighter-rouge">retry</code>, and two messages are separated by a newlline <code class="highlighter-rouge">\n</code>. All other fields are ignored by <code class="highlighter-rouge">text/event-stream</code>. So our event stream looks something like this -</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>event: pulse-ready\n
+data: {message: "we are now actively listening"} \n
+\n
+event: pulse-message\n
+data: {....} \n
+id: &lt;AMQP-message-id&gt; \n
+\n
+event: pulse-message\n
+data: {...} \n
+id: &lt;AMQP-message-id&gt; \n
+\n
+</code></pre>
+</div>
+
+<p>The client side code becomes as simple as this  -</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var source = new EventSource('URL');
+
+    // handle messages
+    source.onmessage = function(event) {
+        // Do something with the data:
+        event.data;
+    };
+</code></pre>
+</div>
+
+<h2 id="alternatives-in-the-past">Alternatives in the past</h2>
+
+<p>The most widely used alternative were Websockets. Historically, the way to receive information is to ask for it, and this is called Polling. A slight variant is Long Polling in which the server holds the request until it has new data to send. However it has several issues like high latency and overloading the server. I found the image below immmensely helpful and also the blogs <a href="https://streamdata.io/blog/server-sent-events/">here</a> and <a href="https://www.smashingmagazine.com/2018/02/sse-websockets-data-flow-http2/">here</a>.</p>
+
+<h2 id="what-have-i-done-">What have I done ?</h2>
+
+<p>The first week went by reading documentations and trying to get SSE working locally. Jonas advised me to take a look at taskcluster-queue and structure my code in a similar way. It is really well written and Jonas told me he’d done long polling in it, which is awesome. I started out with <a href="https://github.com/taskcluster/taskcluster-events/pull/6">this</a> PR. It has only 13 commits as of now. I am using various <code class="highlighter-rouge">taskcluster-lib-*</code> libraries, which is the standard.</p>
+
+<p>There is a major update of all libraries going on to use <code class="highlighter-rouge">rootUrl</code>, as part of a bigger Redeploability initiative, to make Taskcluster easy to use for people both inside and outside of the Mozilla network. Here are the trackers - <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1427839">Internal Redpeployability</a>, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1427838">External Redeployability</a>. The extensive list of r14y bugs are <a href="https://bugzilla.mozilla.org/buglist.cgi?quicksearch=redeployability&amp;list_id=14167797">here</a>.</p>
+
+<h2 id="how-does-it-affect-my-project-">How does it affect my project ?</h2>
+
+<p>I had originally written the code using the same versions as in <code class="highlighter-rouge">taskcluster-queue</code>. Jonas told me to update to v10 as all <code class="highlighter-rouge">tascluster-lib-*</code> had been bumped up to reflect major changes in specification. For example <code class="highlighter-rouge">taskcluster-lib-loader</code> went from v2.0.0 to v10.0.0</p>
+
+<p>I have since had to make changes, which has slowed down my work. Jonas came up with this idea that we should use <code class="highlighter-rouge">taskcluster-lib-api</code> to create an API endpoint which we can use (or in some ways abuse) for our needs. The client can send a GET request to this endpoint to establish a <code class="highlighter-rouge">keep-alive</code> connection.</p>
+
+<p>I am unable to a successful build at the moment. I will be coordinating with Dustin about the latest changes, which haven’t yet made it to the docs.</p>
+
+<h2 id="coming-up">Coming up</h2>
+
+<p>First on my list is to get this thing running. After that, I will have to create a <code class="highlighter-rouge">docs/</code> folder to document the endpoint. Then, write a few simple tests and at the same time add PulseListener.</p>
+
+<h2 id="other-news">Other news</h2>
+
+<p>I was lucky enough to have gotten my visa interview in such quick time. I finally received my US visa to be able to travel to San Francisco for All Hands. I will be leaving on June 11. I will have to complete the thing above if I am stay on schedule.</p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Yashvardhan Didwania</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              ydidwania
+            
+            </li>
+            
+            <li><a href="mailto:didwaniayashvardhan@gmail.com">didwaniayashvardhan@gmail.com</a></li>
+            
+        </ul>
+      </div>
+      <div class="footer-col footer-filler">
+        <p> </p>
+      </div>
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/ydidwania"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">ydidwania</span></a>
+
+          </li>
+          
+
+          
+            <li>
+              <a href="https://facebook.com/ydidwania"><span class="icon icon--facebook">
+<svg  x="0px" y="0px" width="16px" height="16px" viewBox="0 0 90 90" style="enable-background:new 0 0 90 90;" xml:space="preserve">
+<g>
+    <path id="Facebook__x28_alt_x29_" d="M90,15.001C90,7.119,82.884,0,75,0H15C7.116,0,0,7.119,0,15.001v59.998   C0,82.881,7.116,90,15.001,90H45V56H34V41h11v-5.844C45,25.077,52.568,16,61.875,16H74v15H61.875C60.548,31,59,32.611,59,35.024V41   h15v15H59v34h16c7.884,0,15-7.119,15-15.001V15.001z" fill="#3A589B"/>
+</g>
+</svg></span><span class="username">ydidwania</span></a>
+
+            </li>
+          
+        </ul>
+      </div>
+      <div class="footer-col footer-filler">
+        <p> </p>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <a href="https://github.com/ydidwania/ydidwania.github.io">Jekyll Source</a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
