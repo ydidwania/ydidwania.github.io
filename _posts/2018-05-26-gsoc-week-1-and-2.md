@@ -5,15 +5,15 @@ date:   2018-05-26 09:00:00 +0530
 
 ---
 
-These have been quite eventful two weeks. I am writing two weeks together beacuse there isn't much to write about week one.I started watching Star Wars back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.
+These have been quite eventful two weeks. I am writing two weeks together beacuse there isn't much to write about week one. I started watching **Star Wars** back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.
 
 ![star-wars]({{site.url}}/assets/star-wars.jpg){: .center-image}
 
 ## Major Changes
 
-In the first chat I had with [Jonas](https://mozillians.org/en-US/u/jonasfj/), post selection, he told me about this new technology, **Server Sent Events**, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it) in a lot of places. The [Mozilla Developer Network][mdn] had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge dont support it as yet, but there are [polyfills](https://github.com/Yaffle/EventSource) for that, so all good.
+In the first chat I had with [Jonas](https://mozillians.org/en-US/u/jonasfj/), post selection, he told me about this new technology, **Server Sent Events**, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it) in a lot of places. The [Mozilla Developer Network][mdn] had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge [dont support](https://caniuse.com/#feat=eventsource) it as yet, but there are [polyfills](https://github.com/Yaffle/EventSource) for that, so all good.
 
-After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, and needs a separate blogpost to explain it. This trims down my project even further, which means we can get to [`taskcluster-github`][tc-gh] or r14y bugs faster :)
+After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, and needs a separate blogpost to explain it. This trims down my project even further, which means I can get to [`taskcluster-github`][tc-gh] or r14y bugs faster :)
 
 
 ## Server Sent Events

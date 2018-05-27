@@ -8,7 +8,7 @@
 
   
   <title>Yashvardhan-GSoC Week 1 and 2 : A New Beginning</title>
-  <meta name="description" content="These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one.I started watching Star Wars back ...">
+  <meta name="description" content="These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one. I started watching Star Wars back...">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2018/05/26/gsoc-week-1-and-2.html">
@@ -91,15 +91,15 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one.I started watching Star Wars back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.</p>
+    <p>These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one. I started watching <strong>Star Wars</strong> back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.</p>
 
 <p><img src="http://localhost:4000/assets/star-wars.jpg" alt="star-wars" class="center-image" /></p>
 
 <h2 id="major-changes">Major Changes</h2>
 
-<p>In the first chat I had with <a href="https://mozillians.org/en-US/u/jonasfj/">Jonas</a>, post selection, he told me about this new technology, <strong>Server Sent Events</strong>, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it) in a lot of places. The <a href="https://developer.mozilla.org/en-US/">Mozilla Developer Network</a> had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge dont support it as yet, but there are <a href="https://github.com/Yaffle/EventSource">polyfills</a> for that, so all good.</p>
+<p>In the first chat I had with <a href="https://mozillians.org/en-US/u/jonasfj/">Jonas</a>, post selection, he told me about this new technology, <strong>Server Sent Events</strong>, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it) in a lot of places. The <a href="https://developer.mozilla.org/en-US/">Mozilla Developer Network</a> had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge <a href="https://caniuse.com/#feat=eventsource">dont support</a> it as yet, but there are <a href="https://github.com/Yaffle/EventSource">polyfills</a> for that, so all good.</p>
 
-<p>After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, and needs a separate blogpost to explain it. This trims down my project even further, which means we can get to <a href="https://github.com/taskcluster/taskcluster-github/"><code class="highlighter-rouge">taskcluster-github</code></a> or r14y bugs faster :)</p>
+<p>After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, and needs a separate blogpost to explain it. This trims down my project even further, which means I can get to <a href="https://github.com/taskcluster/taskcluster-github/"><code class="highlighter-rouge">taskcluster-github</code></a> or r14y bugs faster :)</p>
 
 <h2 id="server-sent-events">Server Sent Events</h2>
 
