@@ -99,7 +99,7 @@
 <code class="highlighter-rouge">Content Security Policy: The page’s settings blocked the loading of a resource at self (“default-src”).</code>
 The <a href="https://developers.google.com/web/fundamentals/security/csp/">CSP</a> header determines what scripts the user is allowed to load. This is to protect against cross-site scripting attacks (XSS). The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/connect-src"><code class="highlighter-rouge">connect-src</code></a> directive allows scripts to open SSE connections. However, a bunch of other changes had to be made in order to get it running on the browser. Jonas suggested trying to get everything working with <code class="highlighter-rouge">curl</code> first.</p>
 
-<p>There I realized that the api was actually at <code class="highlighter-rouge">/api/events/v1/connect/</code>, and there was nothing in the docs to suggest that. All <code class="highlighter-rouge">taskcluster-lib-api</code> endpoints are at ‘/api/<serviceName>/<version>/<route>'.</route></version></serviceName></p>
+<p>There I realized that the api was actually at <code class="highlighter-rouge">/api/events/v1/connect/</code>, and there was nothing in the docs to suggest that. All <code class="highlighter-rouge">taskcluster-lib-api</code> endpoints are at <code class="highlighter-rouge">/api/&lt;serviceName&gt;/&lt;version&gt;/&lt;route&gt;</code>.</p>
 
 <h2 id="handling-server-errors">Handling Server Errors</h2>
 
@@ -109,9 +109,9 @@ The <a href="https://developers.google.com/web/fundamentals/security/csp/">CSP</
 
 <h2 id="work-on-bindings">Work on bindings</h2>
 
-<p>Passing bindings through curl in bash was creating an issue, where the shell would start backgroud process in bash. And I wasn’t able to terminate the connection without closing the server. Thus I wrote a simple client script using <a href="https://www.npmjs.com/package/eventsource">EventSource</a> at <code class="highlighter-rouge">test\api_test.js</code>. Later this will actually contain tests.</p>
+<p>Passing bindings through <code class="highlighter-rouge">curl</code> in bash was creating an issue, where the shell would start backgroud process in bash. And I wasn’t able to terminate the connection without closing the server. Thus I wrote a simple client script using <a href="https://www.npmjs.com/package/eventsource">EventSource</a> at <code class="highlighter-rouge">test\api_test.js</code>. Later this will actually contain tests.</p>
 
-<p>Also the json had to be url encoded. I used the <a href="https://www.npmjs.com/package/urlencode">urlencode</a> package. It is essentially translating characters like spaces,  parantheses, etc to a universal representation. For example a space is represented by <code class="highlighter-rouge">%20</code> as you may have observed.</p>
+<p>Also the json had to be url encoded. I used the <a href="https://www.npmjs.com/package/urlencode">urlencode</a> package. It is essentially translating characters like spaces, braces, etc to a universal representation. For example a space is represented by <code class="highlighter-rouge">%20</code> as you may have observed.</p>
 
 <p>For now json validation is just a function which returns true. I will need to add a check for schema in the coming week.</p>
 
@@ -121,7 +121,7 @@ The <a href="https://developers.google.com/web/fundamentals/security/csp/">CSP</
 
 <h2 id="coming-up">Coming up..</h2>
 
-<p>A complete working listener, and tests. After the <code class="highlighter-rouge">listener</code> is working, we will have to make sure we take care of all errors, and a bit of cleanup. Also, I will be travelling to my hometown this Monday. Hopefully, my prductivity doesn’t take a hit!</p>
+<p>A complete working listener, and tests. After the <code class="highlighter-rouge">listener</code> is working, we will have to make sure we take care of all errors, and a bit of cleanup. Also, I will be travelling to my hometown this Monday. Hopefully, my productivity doesn’t take a hit!</p>
 
 
   </div>
