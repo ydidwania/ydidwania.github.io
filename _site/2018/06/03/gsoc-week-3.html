@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <title>Yashvardhan-GSoC Week 3 : Connection Established</title>
+  <meta name="description" content="This week, I can safely say has been the most productive yet. The first part of the week was spent in setting up only a ping message from the server. Towards...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2018/06/03/gsoc-week-3.html">
+  <link rel="alternate" type="application/rss+xml" title="Yashvardhan Didwania" href="/feed.xml">
+  <link rel="icon" href="http://localhost:4000/favicon.ico" />
+
+
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Yashvardhan Didwania</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/blog/">Blog</a>
+            
+          
+            
+            
+            <a class="page-link" href="/">About</a>
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/projects">Projects</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">GSoC Week 3 : Connection Established</h1>
+    <p class="post-meta">
+      <time datetime="2018-06-03T09:00:00+05:30" itemprop="datePublished">
+        
+        Jun 3, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>This week, I can safely say has been the most productive yet. The first part of the week was spent in setting up only a <code class="highlighter-rouge">ping</code> message from the server. Towards the end, I managed to pass the bindings to the server and and bind the listener.</p>
+
+<h2 id="setting-up-connection">Setting up Connection</h2>
+
+<p>I set up a basic api at <code class="highlighter-rouge">/connect/</code> to send <code class="highlighter-rouge">ping</code> messages at 10s intervals. To check, I was connecting to <code class="highlighter-rouge">localhost:12345/connect</code>, becuase thats where (I thought) my api was hosted. The browser console gave this error.
+<code class="highlighter-rouge">Content Security Policy: The page’s settings blocked the loading of a resource at self (“default-src”).</code>
+The <a href="https://developers.google.com/web/fundamentals/security/csp/">CSP</a> header determines what scripts the user is allowed to load. This is to protect against cross-site scripting attacks (XSS). The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/connect-src"><code class="highlighter-rouge">connect-src</code></a> directive allows scripts to open SSE connections. However, a bunch of other changes had to be made in order to get it running on the browser. Jonas suggested trying to get everything working with <code class="highlighter-rouge">curl</code> first.</p>
+
+<p>There I realized that the api was actually at <code class="highlighter-rouge">/api/events/v1/connect/</code>, and there was nothing in the docs to suggest that. All <code class="highlighter-rouge">taskcluster-lib-api</code> endpoints are at ‘/api/<serviceName>/<version>/<route>'.</route></version></serviceName></p>
+
+<h2 id="handling-server-errors">Handling Server Errors</h2>
+
+<p>Error handling is crucial in node as it shuts down the server. Hence, I had to wrap most of my code in try-catch. And in cases of error if the head is already written(connection was successfully established) and the request is still open, send an error message, otherwise send a 5xx status code.</p>
+
+<p>When client closed the connection remotely, we had to end the response. Jonas gave me a good snippet on how we can use a combination of Promises to solve this problem and avoid the <code class="highlighter-rouge">write after end</code> error.</p>
+
+<h2 id="work-on-bindings">Work on bindings</h2>
+
+<p>Passing bindings through curl in bash was creating an issue, where the shell would start backgroud process in bash. And I wasn’t able to terminate the connection without closing the server. Thus I wrote a simple client script using <a href="https://www.npmjs.com/package/eventsource">EventSource</a> at <code class="highlighter-rouge">test\api_test.js</code>. Later this will actually contain tests.</p>
+
+<p>Also the json had to be url encoded. I used the <a href="https://www.npmjs.com/package/urlencode">urlencode</a> package. It is essentially translating characters like spaces,  parantheses, etc to a universal representation. For example a space is represented by <code class="highlighter-rouge">%20</code> as you may have observed.</p>
+
+<p>For now json validation is just a function which returns true. I will need to add a check for schema in the coming week.</p>
+
+<h2 id="listener">Listener</h2>
+
+<p>I was able to bind the listener, but not receiving messages. Turns out I didn’t give the proper <code class="highlighter-rouge">vhost</code>. This new parameter was also introduced in v10 of <a href="https://github.com/taskcluster/taskcluster-client"><code class="highlighter-rouge">taskcluster-client</code></a>. After this, I opened a <a href="https://github.com/taskcluster/taskcluster-client/pull/96">PR</a> to update their docs. Once I know what should <code class="highlighter-rouge">vhost</code> be, I am sure this will work.</p>
+
+<h2 id="coming-up">Coming up..</h2>
+
+<p>A complete working listener, and tests. After the <code class="highlighter-rouge">listener</code> is working, we will have to make sure we take care of all errors, and a bit of cleanup. Also, I will be travelling to my hometown this Monday. Hopefully, my prductivity doesn’t take a hit!</p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Yashvardhan Didwania</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              ydidwania
+            
+            </li>
+            
+            <li><a href="mailto:didwaniayashvardhan@gmail.com">didwaniayashvardhan@gmail.com</a></li>
+            
+        </ul>
+      </div>
+      <div class="footer-col footer-filler">
+        <p> </p>
+      </div>
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/ydidwania"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">ydidwania</span></a>
+
+          </li>
+          
+
+          
+            <li>
+              <a href="https://facebook.com/ydidwania"><span class="icon icon--facebook">
+<svg  x="0px" y="0px" width="16px" height="16px" viewBox="0 0 90 90" style="enable-background:new 0 0 90 90;" xml:space="preserve">
+<g>
+    <path id="Facebook__x28_alt_x29_" d="M90,15.001C90,7.119,82.884,0,75,0H15C7.116,0,0,7.119,0,15.001v59.998   C0,82.881,7.116,90,15.001,90H45V56H34V41h11v-5.844C45,25.077,52.568,16,61.875,16H74v15H61.875C60.548,31,59,32.611,59,35.024V41   h15v15H59v34h16c7.884,0,15-7.119,15-15.001V15.001z" fill="#3A589B"/>
+</g>
+</svg></span><span class="username">ydidwania</span></a>
+
+            </li>
+          
+        </ul>
+      </div>
+      <div class="footer-col footer-filler">
+        <p> </p>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <a href="https://github.com/ydidwania/ydidwania.github.io">Jekyll Source</a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
