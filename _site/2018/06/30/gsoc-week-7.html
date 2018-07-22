@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Yashvardhan-Blog</title>
-  <meta name="description" content="">
+  <title>Yashvardhan-GSoC Week 7 : The new component called Listeners</title>
+  <meta name="description" content="With the testing framework almost ready, this week involved using what is called fake listening in testing to make it independent of the internet.">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/blog/">
+  <link rel="canonical" href="http://localhost:4000/2018/06/30/gsoc-week-7.html">
   <link rel="alternate" type="application/rss+xml" title="Yashvardhan Didwania" href="/feed.xml">
   <link rel="icon" href="http://localhost:4000/favicon.ico" />
 
@@ -78,49 +78,50 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title">Blog</h1>
+    <h1 class="post-title" itemprop="name headline">GSoC Week 7 : The new component called Listeners</h1>
+    <p class="post-meta">
+      <time datetime="2018-06-30T09:00:00+05:30" itemprop="datePublished">
+        
+        Jun 30, 2018
+      </time>
+      </p>
   </header>
 
-  <div class="post-content">
-    <ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>With the testing framework almost ready, this week involved using what is called <em>fake listening</em> in testing to make it independent of the internet.</p>
 
-	<li>
-		<time>Jun 30, 2018</time>
-		<h3><a href="/2018/06/30/gsoc-week-7.html">GSoC Week 7 : The new component called Listeners</a></h3>
-	</li>
+<h2 id="what-does-that-mean">What does that mean?</h2>
 
-	<li>
-		<time>Jun 23, 2018</time>
-		<h3><a href="/2018/06/23/gsoc-week-5-and-6.html">All Hands and AfterEffects</a></h3>
-	</li>
+<p>Fake listening means that the PulseListener instance does not actually listen for messages. You can send a message on it using <code class="highlighter-rouge">listener.fakeMessage()</code> and it is delivered to the listener. Route filtering is disabled in the <code class="highlighter-rouge">fake</code> mode. This method is almost standard in testing, using fakes wherever possible in order to avoid accessing actual resources.</p>
 
-	<li>
-		<time>Jun 9, 2018</time>
-		<h3><a href="/2018/06/09/gsoc-week-4.html">GSoC Week 4 : Pre All Hands </a></h3>
-	</li>
+<p>In order to send a fake message, I need to access that within my test files, and since I had defined them inside my api call function, there was no way I can do that. This left one option - carving out the listeners into its own component and making pulse credentials available to it. Earlier I had passed a <code class="highlighter-rouge">PulseConnection</code> as context to my api content. To enable fake listening I only had to set the credentials to <code class="highlighter-rouge"><span class="p">{</span><span class="err">fake:</span><span class="w"> </span><span class="err">true</span><span class="p">}</span></code>.</p>
 
-	<li>
-		<time>Jun 3, 2018</time>
-		<h3><a href="/2018/06/03/gsoc-week-3.html">GSoC Week 3 : Connection Established</a></h3>
-	</li>
+<h2 id="sounds-simple-doesnt-it">Sounds simple, doesn’t it?</h2>
 
-	<li>
-		<time>May 26, 2018</time>
-		<h3><a href="/2018/05/26/gsoc-week-1-and-2.html">GSoC Week 1 and 2 : A New Beginning</a></h3>
-	</li>
+<p>Well, not really. In order to access the <code class="highlighter-rouge">Listener</code> component in the testing framework, I will have to refactor how test suites are setup and components are loaded to be compliant with <a href="https://gist.github.com/djmitche/010023b33f05bd57752397a21e0763e7#tests">this</a>. Luckily a lot of services had already been converted. It made life a lot easier for me.</p>
 
-	<li>
-		<time>May 1, 2018</time>
-		<h3><a href="/2018/05/01/gsoc-selection.html">GSoC Selection</a></h3>
-	</li>
-
-
+<p>For example, a <code class="highlighter-rouge">stickyLoader</code> was introduced in <code class="highlighter-rouge">taskcluster-lib-testing</code> which would use the same instance of a component, if already present, while loading it afterwards as a dependency. In my test suite I had invoked two functions -</p>
+<ul>
+  <li><code class="highlighter-rouge">withPulse</code> - which loads the listeners component(also making it accessible ) with fake credentials.</li>
+  <li><code class="highlighter-rouge">withServer</code> - loads the server component which has listeners as a dependency.</li>
 </ul>
+
+<p>Moving the listeners into a component (and a file) of its own, created situations where an error was not caught and this caused the <code class="highlighter-rouge">UnhandledPromiseRejectionWarning</code> which crashed the server. After a few more nits, it was ready to be pushed to heroku.</p>
+
+<h2 id="deliverables">Deliverables</h2>
+
+<p>My earlier PR got merged this week, thanks to hassan. I opened another PR , for the  above changes hoping it is approved soon.</p>
+
+<h2 id="coming-up">Coming up</h2>
+
+<p>I am leaving today for a family vacation to Ladakh. I will not be able to work due to poor network connectivity in these areas. I still have to get the pulse-inspector compatible with the new events, and then have both deployed into production.</p>
+
   </div>
 
+  
 </article>
 
       </div>
