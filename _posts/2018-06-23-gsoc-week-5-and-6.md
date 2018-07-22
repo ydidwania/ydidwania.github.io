@@ -29,7 +29,11 @@ Another problem I discovered was that the [`EventSource`](https://www.w3.org/TR/
 
 The biggest outcome of these two weeks was I had a somewhat stable [`mocha`](https://www.npmjs.com/package/mocha) testing framework. A significant part of the latter week was spent in making sure making the code more reusable so that new tests do not have a lot of copied code. I no longer have to run the server on one bash instance and my client on another. Also wrote a few tests for checking input validation, invalid exchanges and successful connections.
 
+## Finally deployed somewhere
+
+Jonas set me up with a heroku staging environment at `https://taskcluster-events-staging.herokuapp.com/` under the mozillacorporation account. And I was quick to deploy. This also helped him and others to test my changes quickly and easily.
+
 ## What's Ahead
 
-The next task is to get this PR merged. Then I will start working on the client implementation that is [pulse-inspector](tools.taskcluster.net/pulse-inspector) in ['tc-tools'](http://github.com/taskcluster/taskcluster-tools). That will then leave me with getting this deployed to `events.taskcluster.net`. Till then...
+The next task is to get this PR merged. Next thing is to upgrade to use fake listening( more on it next week). Then I will start working on the client implementation that is [pulse-inspector](tools.taskcluster.net/pulse-inspector) in ['tc-tools'](http://github.com/taskcluster/taskcluster-tools). That will then leave me with getting this deployed to `events.taskcluster.net`. Till then...
 
