@@ -91,11 +91,11 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>With the testing framework almost ready, this week involved using what is called <em>fake listening</em> in testing to make it independent of the internet.</p>
+    <p>With the testing framework almost ready, this week involved using what is called <strong>fake listening</strong> in testing to make it independent of the internet.</p>
 
 <h2 id="what-does-that-mean">What does that mean?</h2>
 
-<p>Fake listening means that the PulseListener instance does not actually listen for messages. You can send a message on it using <code class="highlighter-rouge">listener.fakeMessage()</code> and it is delivered to the listener. Route filtering is disabled in the <code class="highlighter-rouge">fake</code> mode. This method is almost standard in testing, using fakes wherever possible in order to avoid accessing actual resources.</p>
+<p><a href="https://github.com/taskcluster/taskcluster-client#fake-listening">Fake listening</a> means that the PulseListener instance does not actually listen for messages. You can send a message on it using <code class="highlighter-rouge">listener.fakeMessage()</code> and it is delivered to the listener. Route filtering is disabled in the <code class="highlighter-rouge">fake</code> mode. This method is almost standard in testing, using fakes wherever possible in order to <strong>avoid using real credentials and resources</strong>.</p>
 
 <p>In order to send a fake message, I need to access that within my test files, and since I had defined them inside my api call function, there was no way I can do that. This left one option - carving out the listeners into its own component and making pulse credentials available to it. Earlier I had passed a <code class="highlighter-rouge">PulseConnection</code> as context to my api content. To enable fake listening I only had to set the credentials to <code class="highlighter-rouge"><span class="p">{</span><span class="err">fake:</span><span class="w"> </span><span class="err">true</span><span class="p">}</span></code>.</p>
 
@@ -103,7 +103,7 @@
 
 <p>Well, not really. In order to access the <code class="highlighter-rouge">Listener</code> component in the testing framework, I will have to refactor how test suites are setup and components are loaded to be compliant with <a href="https://gist.github.com/djmitche/010023b33f05bd57752397a21e0763e7#tests">this</a>. Luckily a lot of services had already been converted. It made life a lot easier for me.</p>
 
-<p>For example, a <code class="highlighter-rouge">stickyLoader</code> was introduced in <code class="highlighter-rouge">taskcluster-lib-testing</code> which would use the same instance of a component, if already present, while loading it afterwards as a dependency. In my test suite I had invoked two functions -</p>
+<p>For example, a <a href="https://github.com/taskcluster/taskcluster-lib-testing#sticky-loader"><code class="highlighter-rouge">stickyLoader</code></a> was introduced in <a href="https://github.com/taskcluster/taskcluster-lib-testing"><code class="highlighter-rouge">taskcluster-lib-testing</code></a> which would use the <strong>same instance of a component</strong>, if already present, while loading it afterwards as a dependency. Basically, <strong>dependency injection</strong> in technical terms. In my test suite I had invoked two functions -</p>
 <ul>
   <li><code class="highlighter-rouge">withPulse</code> - which loads the listeners component(also making it accessible ) with fake credentials.</li>
   <li><code class="highlighter-rouge">withServer</code> - loads the server component which has listeners as a dependency.</li>
@@ -113,11 +113,11 @@
 
 <h2 id="deliverables">Deliverables</h2>
 
-<p>My earlier PR got merged this week, thanks to hassan. I opened another PR , for the  above changes hoping it is approved soon.</p>
+<p>My <a href="https://github.com/taskcluster/taskcluster-events/pull/6">earlier PR</a> got merged this week, thanks to <a href="https://mozillians.org/en-US/u/helfi/">hassan</a> for the quick reviews. I opened another <a href="https://github.com/taskcluster/taskcluster-events/pull/7">PR</a> , for the  above changes hoping it is approved soon.</p>
 
 <h2 id="coming-up">Coming up</h2>
 
-<p>I am leaving today for a family vacation to Ladakh. I will not be able to work due to poor network connectivity in these areas. I still have to get the pulse-inspector compatible with the new events, and then have both deployed into production.</p>
+<p>I am leaving today for a family vacation to Ladakh. I will not be able to work due to poor network connectivity in these areas. I still have to get the <a href="http://tools.taskcluster.net/pulse-inspector">pulse-inspector</a> compatible with the new events, and then have both deployed into production.</p>
 
   </div>
 
