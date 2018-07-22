@@ -95,7 +95,7 @@
 
 <h2 id="connection-to-pulse">Connection to Pulse</h2>
 
-<p>The <code class="highlighter-rouge">tc-events</code> proxy needs to connect to the <code class="highlighter-rouge">Pulse</code> server in order to receive messages. One part of the redeployability<code class="highlighter-rouge"> efforts I talked about in my blog of the first week, was making this server configurable. This introduced two new parameters, </code>hostname<code class="highlighter-rouge"> and </code>vhost<code class="highlighter-rouge">. For internal projects they are </code>pulse.mozilla.org<code class="highlighter-rouge"> and </code>/<code class="highlighter-rouge"> respectively. I incorrectly set </code>vhost<code class="highlighter-rouge"> to </code>5781<code class="highlighter-rouge"> which was actually the port </code>tc-client` was using.</p>
+<p>The <code class="highlighter-rouge">tc-events</code> proxy needs to connect to the <code class="highlighter-rouge">Pulse</code> server in order to receive messages. One part of the redeployability efforts I talked about in my blog of the first week, was making this server configurable. This introduced two new parameters, <code class="highlighter-rouge">hostname</code> and <code class="highlighter-rouge">vhost</code>. For internal projects they are <code class="highlighter-rouge">pulse.mozilla.org</code> and <code class="highlighter-rouge">/</code> respectively. I incorrectly set <code class="highlighter-rouge">vhost</code> to <code class="highlighter-rouge">5781</code> which was actually the port <code class="highlighter-rouge">tc-client</code> was using.</p>
 
 <p>With this thing corrected, I could successfully receive messages and verified it by using the test file I created.</p>
 
