@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Yashvardhan-Blog</title>
-  <meta name="description" content="">
+  <title>Yashvardhan-GSoC Week 8 : Debug, Code, Debug</title>
+  <meta name="description" content="With the new events coming up good, it was time to see how the two parts work together. Since I did not write any code in the 1st week of July, this week was...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/blog/">
+  <link rel="canonical" href="http://localhost:4000/2018/06/30/gsoc-week-8.html">
   <link rel="alternate" type="application/rss+xml" title="Yashvardhan Didwania" href="/feed.xml">
   <link rel="icon" href="http://localhost:4000/favicon.ico" />
 
@@ -78,54 +78,51 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title">Blog</h1>
+    <h1 class="post-title" itemprop="name headline">GSoC Week 8 : Debug, Code, Debug</h1>
+    <p class="post-meta">
+      <time datetime="2018-06-30T09:00:00+05:30" itemprop="datePublished">
+        
+        Jun 30, 2018
+      </time>
+      </p>
   </header>
 
-  <div class="post-content">
-    <ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>With the new events coming up good, it was time to see how the two parts work together. Since I did not write any code in the 1st week of July, this week was more about getting things done quickly.</p>
 
-	<li>
-		<time>Jun 30, 2018</time>
-		<h3><a href="/2018/06/30/gsoc-week-8.html">GSoC Week 8 : Debug, Code, Debug</a></h3>
-	</li>
+<h2 id="the-new-listeners-component">The new Listeners Component</h2>
 
-	<li>
-		<time>Jun 30, 2018</time>
-		<h3><a href="/2018/06/30/gsoc-week-7.html">GSoC Week 7 : The new component called Listeners</a></h3>
-	</li>
+<p>My <a href="https://github.com/taskcluster/taskcluster-events/pull/7">PR</a> was finally merged after a few minor changes. Now the events server sends the entire message to the client instead of only <code class="highlighter-rouge">message.payload</code>. This gives them additional information to work with like the <code class="highlighter-rouge">exchange</code> and <code class="highlighter-rouge">routes</code> of the message. I also opened another <a href="https://github.com/taskcluster/taskcluster-events/pull/8/">PR</a> for slight changes while I worked on <code class="highlighter-rouge">tc-tools</code></p>
 
-	<li>
-		<time>Jun 23, 2018</time>
-		<h3><a href="/2018/06/23/gsoc-week-5-and-6.html">All Hands and AfterEffects</a></h3>
-	</li>
+<h2 id="getting-the-client-ready">Getting the client ready</h2>
 
-	<li>
-		<time>Jun 9, 2018</time>
-		<h3><a href="/2018/06/09/gsoc-week-4.html">GSoC Week 4 : Pre All Hands </a></h3>
-	</li>
+<p>This involved making quite a few decisions, so I was quite active and talking to the guys on IRC. Conventionally, <code class="highlighter-rouge">pulse-inspector</code> used <a href="https://github.com/taskcluster/taskcluster-client-web"><code class="highlighter-rouge">tc-client-web</code></a> which exposed a <code class="highlighter-rouge">WebListener</code> which in turn connected to <code class="highlighter-rouge">events.taskcluster.net</code>.
+Since the client was simple to do, we decided its best to put <code class="highlighter-rouge">tc-tools</code> in direct contact with <code class="highlighter-rouge">tc-events</code>.</p>
 
-	<li>
-		<time>Jun 3, 2018</time>
-		<h3><a href="/2018/06/03/gsoc-week-3.html">GSoC Week 3 : Connection Established</a></h3>
-	</li>
+<h2 id="trouble-with-headers">Trouble with headers</h2>
 
-	<li>
-		<time>May 26, 2018</time>
-		<h3><a href="/2018/05/26/gsoc-week-1-and-2.html">GSoC Week 1 and 2 : A New Beginning</a></h3>
-	</li>
+<p>The <code class="highlighter-rouge">EventSource</code> in <code class="highlighter-rouge">tc-tools</code> was setting the header <code class="highlighter-rouge">Cache-Control</code> on its own while <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers"><code class="highlighter-rouge">Access-Control-Allow-Headers</code></a> in the response did not include <code class="highlighter-rouge">Cache-Control</code>. This led to an error <code class="highlighter-rouge">Request header field Cache-Control is not allowed by Access-Control-Allow-Headers in preflight response</code>.</p>
 
-	<li>
-		<time>May 1, 2018</time>
-		<h3><a href="/2018/05/01/gsoc-selection.html">GSoC Selection</a></h3>
-	</li>
+<p>A preflight request is one made by browsers to make sure CORS protocol is respected. In other words it is asking the server if it allows certain operations to be performed. In my case the server did not allow <code class="highlighter-rouge">Cache-Control</code> to be set by the origin.</p>
 
+<p>After some discussion, hassan made changes to <code class="highlighter-rouge">tc-lib-api</code>(v12.3) to add <code class="highlighter-rouge">Cache-Contol</code> in ACAH  in the preflight response. Everything was working fine..</p>
 
-</ul>
+<h2 id="all-hell-breaks-loose">All hell breaks loose</h2>
+
+<p>..until the <code class="highlighter-rouge">listener.resume</code> call started giving timeout randomly. I spent a considerable part of my time figuring this out, finally today I figured out it was my institute network causing the problem. It used to work fine at most times except a few hours each day when I would use it. This was after I added  <code class="highlighter-rouge">debug</code> statements in <code class="highlighter-rouge">node_modules</code> to see what was going on.</p>
+
+<p>Meanwhile, <code class="highlighter-rouge">tc-lib-api</code> v12.3 introduced a minor bug, which was later fixed.</p>
+
+<h2 id="coming-up">Coming up</h2>
+
+<p>My <a href="https://github.com/taskcluster/taskcluster-tools/pull/544">PR</a> will most probably be merged next week. Then the final part of the project would be to get these things running in production. On the sides I also started with <a href="https://github.com/taskcluster/taskcluster-cli"><code class="highlighter-rouge">taskcluster-cli</code></a>. It is written in <code class="highlighter-rouge">go</code> and I am hoping to learn more about in the next week.</p>
+
   </div>
 
+  
 </article>
 
       </div>
