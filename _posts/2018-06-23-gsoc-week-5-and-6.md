@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "All Hands and AfterEffects"
+title:  "All Hands and after effects"
 date:   2018-06-23 09:00:00 +0530
 
 ---
