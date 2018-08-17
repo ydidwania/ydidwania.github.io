@@ -3,14 +3,14 @@ layout: page
 title: About
 ---
 
-Hi there! I am Yashvardhan Didwania. I am currently in my sophomore year in the Electrical Engineering Department here at IIT Bombay.
+Hi there! I am Yashvardhan Didwania. I am currently a junior undergraduate in the Electrical Engineering Department here at IIT Bombay.
 
 I intend to use this page to maintain a blog about 
-my projects and academic as well as non academic goals.
+my [projects][projects] and academic as well as non academic goals and achievements.
 
-I have enjoyed coding since I was introduced to it. I started contributing to Mozilla since September last year and have been going strong for the past few months now. You can take a look at my [Github][github] profile or my [resume][resume] to know more.
+I have enjoyed coding since I was introduced to it. I started contributing to Mozilla since September 2017 and have been going strong since then. I even did a [GSoC](https://summerofcode.withgoogle.com) with Mozilla in the summer of 2018. You can take a look at my [Github][github] profile or my [resume][resume] to know more.
 
-I am currently the manager of [The Web and Coding Club][WnCC] of IIT Bombay where we help those who want to get started with code.
+I am also the manager of [The Web and Coding Club][WnCC] of IIT Bombay where we help those who want to get started with code.
 
 [projects]: /projects
 [WnCC]: http://wncc-iitb.org
