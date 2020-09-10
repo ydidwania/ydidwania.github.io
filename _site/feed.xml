@@ -1,263 +1,273 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-09-10T19:18:58+05:30</updated><id>http://localhost:4000/</id><title type="html">Yashvardhan Didwania</title><subtitle></subtitle><author><name>Dreamer</name></author><entry><title type="html">My GSoC 2018 Code Dump</title><link href="http://localhost:4000/2018/08/09/gsoc-2018-code-dump.html" rel="alternate" type="text/html" title="My GSoC 2018 Code Dump" /><published>2018-08-09T09:00:00+05:30</published><updated>2018-08-09T09:00:00+05:30</updated><id>http://localhost:4000/2018/08/09/gsoc-2018-code-dump</id><content type="html" xml:base="http://localhost:4000/2018/08/09/gsoc-2018-code-dump.html">&lt;p&gt;This post is for all the code I have written during the GSoC period. It has a list of all my pull requests that were submitted for the completion of the GSoC project.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-09-10T19:33:53+05:30</updated><id>http://localhost:4000/</id><title type="html">Yashvardhan Didwania</title><subtitle></subtitle><author><name>Dreamer</name></author><entry><title type="html">My GSoC 2018 Code Dump</title><link href="http://localhost:4000/2018/08/09/gsoc-2018-code-dump.html" rel="alternate" type="text/html" title="My GSoC 2018 Code Dump" /><published>2018-08-09T09:00:00+05:30</published><updated>2018-08-09T09:00:00+05:30</updated><id>http://localhost:4000/2018/08/09/gsoc-2018-code-dump</id><content type="html" xml:base="http://localhost:4000/2018/08/09/gsoc-2018-code-dump.html">This post is for all the code I have written during the GSoC period. It has a list of all my pull requests that were submitted for the completion of the GSoC project.
 
-&lt;p&gt;I would like to state that the new &lt;a href=&quot;https://github.com/taskcluster/taskcluster-events&quot;&gt;taskcluster-events&lt;/a&gt; backend is complete and deployed in production, along with the the &lt;a href=&quot;https://tools.taskcluster.net/pulse-inspector&quot;&gt;Pulse Inspector client&lt;/a&gt;.&lt;/p&gt;
+I would like to state that the new [taskcluster-events](https://github.com/taskcluster/taskcluster-events) backend is complete and deployed in production, along with the the [Pulse Inspector client](https://tools.taskcluster.net/pulse-inspector).
 
-&lt;h2 id=&quot;taskcluster-events&quot;&gt;Taskcluster-Events&lt;/h2&gt;
+## Taskcluster-Events
 
-&lt;p&gt;Taskcluster-events works like a proxy and pushes pulse messages to browser clients over tcp. Pulse messages work on AMQP and are not directly available on the browser. It provides an api endpoint to connect and receive the messages for the specified &lt;code class=&quot;highlighter-rouge&quot;&gt;exchange&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;routingKey&lt;/code&gt; in the query parameters.&lt;/p&gt;
+Taskcluster-events works like a proxy and pushes pulse messages to browser clients over tcp. Pulse messages work on AMQP and are not directly available on the browser. It provides an api endpoint to connect and receive the messages for the specified `exchange` and `routingKey` in the query parameters.
 
-&lt;p&gt;The project was a complete rewrite of this service, and we decided to use Server-Sent Events.&lt;/p&gt;
+The project was a complete rewrite of this service, and we decided to use Server-Sent Events.
 
-&lt;p&gt;Here’s the list of PR’s that were merged(or will be soon) -&lt;/p&gt;
+Here's the list of PR's that were merged(or will be soon) - 
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/6&quot;&gt;PR#6&lt;/a&gt; - This was the initial setup of the server including deploying on Heroku. It contained a major chunk of my work and took over a month to be merged.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/7&quot;&gt;PR#7&lt;/a&gt; - The second goal was to establish a proper testing framework with fake listening.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/8/&quot;&gt;PR#8&lt;/a&gt; - This was to make neccessary changes to get it working with the new pulse-inspector client PR opened in tc-tools.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/9/&quot;&gt;PR#9&lt;/a&gt; - I added a nice Readme.md for documentation.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/10&quot;&gt;PR#10&lt;/a&gt; - This was suggested by Dustin. We rolled back the timeout and increased the ping interval to 20 seconds from the earlier 3.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/11&quot;&gt;PR#11&lt;/a&gt; - This was a quick cleanup PR for the finishing touches.&lt;/li&gt;
-&lt;/ul&gt;
+* [PR#6](https://github.com/taskcluster/taskcluster-events/pull/6) - This was the initial setup of the server including deploying on Heroku. It contained a major chunk of my work and took over a month to be merged.
+* [PR#7](https://github.com/taskcluster/taskcluster-events/pull/7) - The second goal was to establish a proper testing framework with fake listening.
+* [PR#8](https://github.com/taskcluster/taskcluster-events/pull/8/) - This was to make neccessary changes to get it working with the new pulse-inspector client PR opened in tc-tools.
+* [PR#9](https://github.com/taskcluster/taskcluster-events/pull/9/) - I added a nice Readme.md for documentation.
+* [PR#10](https://github.com/taskcluster/taskcluster-events/pull/10) - This was suggested by Dustin. We rolled back the timeout and increased the ping interval to 20 seconds from the earlier 3.
+* [PR#11](https://github.com/taskcluster/taskcluster-events/pull/11) - This was a quick cleanup PR for the finishing touches.
 
-&lt;h2 id=&quot;taskcluster-tools&quot;&gt;Taskcluster-Tools&lt;/h2&gt;
-&lt;p&gt;This is a collection of &lt;a href=&quot;https://tools.taskcluster.net&quot;&gt;tools&lt;/a&gt; for Taskcluster components and elements in the Taskcluster ecosystem. There are tools to manage Taskcluster services, as well as run, debug, inspect and view tasks, task groups, and other Taskcluster related entities.&lt;/p&gt;
+## Taskcluster-Tools
+This is a collection of [tools](https://tools.taskcluster.net) for Taskcluster components and elements in the Taskcluster ecosystem. There are tools to manage Taskcluster services, as well as run, debug, inspect and view tasks, task groups, and other Taskcluster related entities.
 
-&lt;p&gt;My job was to update the &lt;a href=&quot;https://tools.taskcluster.net/pulse-inspector&quot;&gt;Pulse-Inspector&lt;/a&gt; client to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;EventSource&lt;/code&gt; object. Here are my contributions -&lt;/p&gt;
+My job was to update the [Pulse-Inspector](https://tools.taskcluster.net/pulse-inspector) client to use the `EventSource` object. Here are my contributions - 
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-tools/pull/544&quot;&gt;PR#544&lt;/a&gt; - This was the major shift to using the &lt;code class=&quot;highlighter-rouge&quot;&gt;EventSource&lt;/code&gt; instance exposed by the browser.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-tools/pull/552&quot;&gt;PR#552&lt;/a&gt; - Shift other tools using &lt;code class=&quot;highlighter-rouge&quot;&gt;WebListener&lt;/code&gt; to the new tc-events service.&lt;/li&gt;
-&lt;/ul&gt;
+* [PR#544](https://github.com/taskcluster/taskcluster-tools/pull/544) - This was the major shift to using the `EventSource` instance exposed by the browser.
+* [PR#552](https://github.com/taskcluster/taskcluster-tools/pull/552) - Shift other tools using `WebListener` to the new tc-events service.
 
-&lt;h2 id=&quot;taskcluster-cli&quot;&gt;Taskcluster-Cli&lt;/h2&gt;
-&lt;p&gt;This is a command-line client offering control and access to taskcluster from the comfort of your command-line. It provides utilities ranging from direct calls to the specific API endpoints to more complex and practical tasks like listing and cancelling scheduled runs.&lt;/p&gt;
+## Taskcluster-Cli
+This is a command-line client offering control and access to taskcluster from the comfort of your command-line. It provides utilities ranging from direct calls to the specific API endpoints to more complex and practical tasks like listing and cancelling scheduled runs.
 
-&lt;p&gt;My task was to add two command line instructions: one to fetch messages and other to wait for an event like a task to finish or get resolved. This was mostly a stretch goal and I spent a couple days trying to get the hang of &lt;code class=&quot;highlighter-rouge&quot;&gt;golang&lt;/code&gt;. I hope to add the other command soon.&lt;/p&gt;
+My task was to add two command line instructions: one to fetch messages and other to wait for an event like a task to finish or get resolved. This was mostly a stretch goal and I spent a couple days trying to get the hang of `golang`. I hope to add the other command soon. 
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-cli/pull/205&quot;&gt;PR#205&lt;/a&gt; - Added &lt;code class=&quot;highlighter-rouge&quot;&gt;./taskcluster inspect-pulse &amp;lt;exchange&amp;gt; &amp;lt;routingKeyPattern&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+* [PR#205](https://github.com/taskcluster/taskcluster-cli/pull/205) - Added `./taskcluster inspect-pulse &lt;exchange&gt; &lt;routingKeyPattern&gt;`
 
-&lt;h2 id=&quot;non-gsoc-work&quot;&gt;Non GSoC Work&lt;/h2&gt;
+## Non GSoC Work
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Taskcluster-index&lt;/strong&gt; &lt;a href=&quot;https://github.com/taskcluster/taskcluster-index/pull/52&quot;&gt;PR#52&lt;/a&gt;: I updated all libraries on tc-index to v11 and up as part of a Code Sprint during the All Hands week.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Taskcluster-lib-api&lt;/strong&gt; &lt;a href=&quot;https://github.com/taskcluster/taskcluster-lib-api/pull/101&quot;&gt;PR#101&lt;/a&gt; : Just a small Readme update&lt;/li&gt;
-  &lt;li&gt;I also picked up &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1420903&quot;&gt;Bug 1420903&lt;/a&gt; as a mentor and I am excited to help new contributors :)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Dreamer</name></author><summary type="html">This post is for all the code I have written during the GSoC period. It has a list of all my pull requests that were submitted for the completion of the GSoC project.</summary></entry><entry><title type="html">GSoC Week 8 : Debug, Code, Debug</title><link href="http://localhost:4000/2018/07/16/gsoc-week-8.html" rel="alternate" type="text/html" title="GSoC Week 8 : Debug, Code, Debug" /><published>2018-07-16T09:00:00+05:30</published><updated>2018-07-16T09:00:00+05:30</updated><id>http://localhost:4000/2018/07/16/gsoc-week-8</id><content type="html" xml:base="http://localhost:4000/2018/07/16/gsoc-week-8.html">&lt;p&gt;With the new events coming up good, it was time to see how the two parts work together. Since I did not write any code in the 1st week of July, this week was more about getting things done quickly.&lt;/p&gt;
+* **Taskcluster-index** [PR#52](https://github.com/taskcluster/taskcluster-index/pull/52): I updated all libraries on tc-index to v11 and up as part of a Code Sprint during the All Hands week.
+* **Taskcluster-lib-api** [PR#101](https://github.com/taskcluster/taskcluster-lib-api/pull/101) : Just a small Readme update
+* I also picked up [Bug 1420903](https://bugzilla.mozilla.org/show_bug.cgi?id=1420903) as a mentor and I am excited to help new contributors :)</content><author><name>Dreamer</name></author><summary type="html">This post is for all the code I have written during the GSoC period. It has a list of all my pull requests that were submitted for the completion of the GSoC project.</summary></entry><entry><title type="html">GSoC Week 8 : Debug, Code, Debug</title><link href="http://localhost:4000/2018/07/16/gsoc-week-8.html" rel="alternate" type="text/html" title="GSoC Week 8 : Debug, Code, Debug" /><published>2018-07-16T09:00:00+05:30</published><updated>2018-07-16T09:00:00+05:30</updated><id>http://localhost:4000/2018/07/16/gsoc-week-8</id><content type="html" xml:base="http://localhost:4000/2018/07/16/gsoc-week-8.html">With the new events coming up good, it was time to see how the two parts work together. Since I did not write any code in the 1st week of July, this week was more about getting things done quickly.
 
-&lt;h2 id=&quot;the-new-listeners-component&quot;&gt;The new Listeners Component&lt;/h2&gt;
+## The new Listeners Component
 
-&lt;p&gt;My &lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/7&quot;&gt;PR&lt;/a&gt; was finally merged after a few minor changes. Now the events server sends the entire message to the client instead of only &lt;code class=&quot;highlighter-rouge&quot;&gt;message.payload&lt;/code&gt;. This gives them additional information to work with like the &lt;code class=&quot;highlighter-rouge&quot;&gt;exchange&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;routes&lt;/code&gt; of the message. I also opened another &lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/8/&quot;&gt;PR&lt;/a&gt; for slight changes while I worked on &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-tools&lt;/code&gt;&lt;/p&gt;
+My [PR](https://github.com/taskcluster/taskcluster-events/pull/7) was finally merged after a few minor changes. Now the events server sends the entire message to the client instead of only `message.payload`. This gives them additional information to work with like the `exchange` and `routes` of the message. I also opened another [PR](https://github.com/taskcluster/taskcluster-events/pull/8/) for slight changes while I worked on `tc-tools`
 
-&lt;h2 id=&quot;getting-the-client-ready&quot;&gt;Getting the client ready&lt;/h2&gt;
+## Getting the client ready
 
-&lt;p&gt;This involved making quite a few decisions, so I was quite active and talking to the guys on IRC. Conventionally, &lt;code class=&quot;highlighter-rouge&quot;&gt;pulse-inspector&lt;/code&gt; used &lt;a href=&quot;https://github.com/taskcluster/taskcluster-client-web&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tc-client-web&lt;/code&gt;&lt;/a&gt; which exposed a &lt;code class=&quot;highlighter-rouge&quot;&gt;WebListener&lt;/code&gt; which in turn connected to &lt;code class=&quot;highlighter-rouge&quot;&gt;events.taskcluster.net&lt;/code&gt;.
-Since the client was simple to do, we decided its best to put &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-tools&lt;/code&gt; in direct contact with &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-events&lt;/code&gt;.&lt;/p&gt;
+This involved making quite a few decisions, so I was quite active and talking to the guys on IRC. Conventionally, `pulse-inspector` used [`tc-client-web`](https://github.com/taskcluster/taskcluster-client-web) which exposed a `WebListener` which in turn connected to `events.taskcluster.net`.
+Since the client was simple to do, we decided its best to put `tc-tools` in direct contact with `tc-events`.
 
-&lt;h2 id=&quot;trouble-with-headers&quot;&gt;Trouble with headers&lt;/h2&gt;
+## Trouble with headers
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;EventSource&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-tools&lt;/code&gt; was setting the header &lt;code class=&quot;highlighter-rouge&quot;&gt;Cache-Control&lt;/code&gt; on its own while &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Access-Control-Allow-Headers&lt;/code&gt;&lt;/a&gt; in the response did not include &lt;code class=&quot;highlighter-rouge&quot;&gt;Cache-Control&lt;/code&gt;. This led to an error &lt;code class=&quot;highlighter-rouge&quot;&gt;Request header field Cache-Control is not allowed by Access-Control-Allow-Headers in preflight response&lt;/code&gt;.&lt;/p&gt;
+The `EventSource` in `tc-tools` was setting the header `Cache-Control` on its own while [`Access-Control-Allow-Headers`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers) in the response did not include `Cache-Control`. This led to an error `Request header field Cache-Control is not allowed by Access-Control-Allow-Headers in preflight response`.
 
-&lt;p&gt;A preflight request is one made by browsers to make sure CORS protocol is respected. In other words it is asking the server if it allows certain operations to be performed. In my case the server did not allow &lt;code class=&quot;highlighter-rouge&quot;&gt;Cache-Control&lt;/code&gt; to be set by the origin.&lt;/p&gt;
+A preflight request is one made by browsers to make sure CORS protocol is respected. In other words it is asking the server if it allows certain operations to be performed. In my case the server did not allow `Cache-Control` to be set by the origin. 
 
-&lt;p&gt;After some discussion, hassan made changes to &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-lib-api&lt;/code&gt;(v12.3) to add &lt;code class=&quot;highlighter-rouge&quot;&gt;Cache-Contol&lt;/code&gt; in ACAH  in the preflight response. Everything was working fine..&lt;/p&gt;
+After some discussion, hassan made changes to `tc-lib-api`(v12.3) to add `Cache-Contol` in ACAH  in the preflight response. Everything was working fine..
 
-&lt;h2 id=&quot;all-hell-breaks-loose&quot;&gt;All hell breaks loose&lt;/h2&gt;
+## All hell breaks loose
 
-&lt;p&gt;..until the &lt;code class=&quot;highlighter-rouge&quot;&gt;listener.resume&lt;/code&gt; call started giving timeout randomly. I spent a considerable part of my time figuring this out, finally today I figured out it was my institute network causing the problem. It used to work fine at most times except a few hours each day when I would use it. This was after I added  &lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; statements in &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; to see what was going on.&lt;/p&gt;
+..until the `listener.resume` call started giving timeout randomly. I spent a considerable part of my time figuring this out, finally today I figured out it was my institute network causing the problem. It used to work fine at most times except a few hours each day when I would use it. This was after I added  `debug` statements in `node_modules` to see what was going on. 
 
-&lt;p&gt;Meanwhile, &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-lib-api&lt;/code&gt; v12.3 introduced a minor bug, which was later fixed.&lt;/p&gt;
+Meanwhile, `tc-lib-api` v12.3 introduced a minor bug, which was later fixed.
 
-&lt;h2 id=&quot;coming-up&quot;&gt;Coming up&lt;/h2&gt;
+## Coming up
 
-&lt;p&gt;My &lt;a href=&quot;https://github.com/taskcluster/taskcluster-tools/pull/544&quot;&gt;PR&lt;/a&gt; will most probably be merged next week. Then the final part of the project would be to get these things running in production. On the sides I also started with &lt;a href=&quot;https://github.com/taskcluster/taskcluster-cli&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-cli&lt;/code&gt;&lt;/a&gt;. It is written in &lt;code class=&quot;highlighter-rouge&quot;&gt;go&lt;/code&gt; and I am hoping to learn more about in the next week.&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html">With the new events coming up good, it was time to see how the two parts work together. Since I did not write any code in the 1st week of July, this week was more about getting things done quickly.</summary></entry><entry><title type="html">GSoC Week 7 : The new component called Listeners</title><link href="http://localhost:4000/2018/06/30/gsoc-week-7.html" rel="alternate" type="text/html" title="GSoC Week 7 : The new component called Listeners" /><published>2018-06-30T09:00:00+05:30</published><updated>2018-06-30T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/30/gsoc-week-7</id><content type="html" xml:base="http://localhost:4000/2018/06/30/gsoc-week-7.html">&lt;p&gt;With the testing framework almost ready, this week involved using what is called &lt;strong&gt;fake listening&lt;/strong&gt; in testing to make it independent of the internet.&lt;/p&gt;
+My [PR](https://github.com/taskcluster/taskcluster-tools/pull/544) will most probably be merged next week. Then the final part of the project would be to get these things running in production. On the sides I also started with [`taskcluster-cli`](https://github.com/taskcluster/taskcluster-cli). It is written in `go` and I am hoping to learn more about in the next week.</content><author><name>Dreamer</name></author><summary type="html">With the new events coming up good, it was time to see how the two parts work together. Since I did not write any code in the 1st week of July, this week was more about getting things done quickly.</summary></entry><entry><title type="html">GSoC Week 7 : The new component called Listeners</title><link href="http://localhost:4000/2018/06/30/gsoc-week-7.html" rel="alternate" type="text/html" title="GSoC Week 7 : The new component called Listeners" /><published>2018-06-30T09:00:00+05:30</published><updated>2018-06-30T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/30/gsoc-week-7</id><content type="html" xml:base="http://localhost:4000/2018/06/30/gsoc-week-7.html">With the testing framework almost ready, this week involved using what is called **fake listening** in testing to make it independent of the internet.
 
-&lt;h2 id=&quot;what-does-that-mean&quot;&gt;What does that mean?&lt;/h2&gt;
+## What does that mean?
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/taskcluster/taskcluster-client#fake-listening&quot;&gt;Fake listening&lt;/a&gt; means that the PulseListener instance does not actually listen for messages. You can send a message on it using &lt;code class=&quot;highlighter-rouge&quot;&gt;listener.fakeMessage()&lt;/code&gt; and it is delivered to the listener. Route filtering is disabled in the &lt;code class=&quot;highlighter-rouge&quot;&gt;fake&lt;/code&gt; mode. This method is almost standard in testing, using fakes wherever possible in order to &lt;strong&gt;avoid using real credentials and resources&lt;/strong&gt;.&lt;/p&gt;
+[Fake listening](https://github.com/taskcluster/taskcluster-client#fake-listening) means that the PulseListener instance does not actually listen for messages. You can send a message on it using `listener.fakeMessage()` and it is delivered to the listener. Route filtering is disabled in the `fake` mode. This method is almost standard in testing, using fakes wherever possible in order to **avoid using real credentials and resources**.
 
-&lt;p&gt;In order to send a fake message, I need to access that within my test files, and since I had defined them inside my api call function, there was no way I can do that. This left one option - carving out the listeners into its own component and making pulse credentials available to it. Earlier I had passed a &lt;code class=&quot;highlighter-rouge&quot;&gt;PulseConnection&lt;/code&gt; as context to my api content. To enable fake listening I only had to set the credentials to &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;fake:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+In order to send a fake message, I need to access that within my test files, and since I had defined them inside my api call function, there was no way I can do that. This left one option - carving out the listeners into its own component and making pulse credentials available to it. Earlier I had passed a `PulseConnection` as context to my api content. To enable fake listening I only had to set the credentials to `{fake: true}`.
 
-&lt;h2 id=&quot;sounds-simple-doesnt-it&quot;&gt;Sounds simple, doesn’t it?&lt;/h2&gt;
+## Sounds simple, doesn't it?
 
-&lt;p&gt;Well, not really. In order to access the &lt;code class=&quot;highlighter-rouge&quot;&gt;Listener&lt;/code&gt; component in the testing framework, I will have to refactor how test suites are setup and components are loaded to be compliant with &lt;a href=&quot;https://gist.github.com/djmitche/010023b33f05bd57752397a21e0763e7#tests&quot;&gt;this&lt;/a&gt;. Luckily a lot of services had already been converted. It made life a lot easier for me.&lt;/p&gt;
+Well, not really. In order to access the `Listener` component in the testing framework, I will have to refactor how test suites are setup and components are loaded to be compliant with [this](https://gist.github.com/djmitche/010023b33f05bd57752397a21e0763e7#tests). Luckily a lot of services had already been converted. It made life a lot easier for me. 
 
-&lt;p&gt;For example, a &lt;a href=&quot;https://github.com/taskcluster/taskcluster-lib-testing#sticky-loader&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;stickyLoader&lt;/code&gt;&lt;/a&gt; was introduced in &lt;a href=&quot;https://github.com/taskcluster/taskcluster-lib-testing&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-lib-testing&lt;/code&gt;&lt;/a&gt; which would use the &lt;strong&gt;same instance of a component&lt;/strong&gt;, if already present, while loading it afterwards as a dependency. Basically, &lt;strong&gt;dependency injection&lt;/strong&gt; in technical terms. In my test suite I had invoked two functions -&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;withPulse&lt;/code&gt; - which loads the listeners component(also making it accessible ) with fake credentials.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;withServer&lt;/code&gt; - loads the server component which has listeners as a dependency.&lt;/li&gt;
-&lt;/ul&gt;
+For example, a [`stickyLoader`](https://github.com/taskcluster/taskcluster-lib-testing#sticky-loader) was introduced in [`taskcluster-lib-testing`](https://github.com/taskcluster/taskcluster-lib-testing) which would use the **same instance of a component**, if already present, while loading it afterwards as a dependency. Basically, **dependency injection** in technical terms. In my test suite I had invoked two functions -
+* `withPulse` - which loads the listeners component(also making it accessible ) with fake credentials.
+* `withServer` - loads the server component which has listeners as a dependency.
 
-&lt;p&gt;Moving the listeners into a component (and a file) of its own, created situations where an error was not caught and this caused the &lt;code class=&quot;highlighter-rouge&quot;&gt;UnhandledPromiseRejectionWarning&lt;/code&gt; which crashed the server. After a few more nits, it was ready to be pushed to heroku.&lt;/p&gt;
+Moving the listeners into a component (and a file) of its own, created situations where an error was not caught and this caused the `UnhandledPromiseRejectionWarning` which crashed the server. After a few more nits, it was ready to be pushed to heroku.
 
-&lt;h2 id=&quot;deliverables&quot;&gt;Deliverables&lt;/h2&gt;
+## Deliverables
 
-&lt;p&gt;My &lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/6&quot;&gt;earlier PR&lt;/a&gt; got merged this week, thanks to &lt;a href=&quot;https://mozillians.org/en-US/u/helfi/&quot;&gt;hassan&lt;/a&gt; for the quick reviews. I opened another &lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/7&quot;&gt;PR&lt;/a&gt; , for the  above changes hoping it is approved soon.&lt;/p&gt;
+My [earlier PR](https://github.com/taskcluster/taskcluster-events/pull/6) got merged this week, thanks to [hassan](https://mozillians.org/en-US/u/helfi/) for the quick reviews. I opened another [PR](https://github.com/taskcluster/taskcluster-events/pull/7) , for the  above changes hoping it is approved soon.  
 
-&lt;h2 id=&quot;coming-up&quot;&gt;Coming up&lt;/h2&gt;
+## Coming up
 
-&lt;p&gt;I am leaving today for a family vacation to Ladakh. I will not be able to work due to poor network connectivity in these areas. I still have to get the &lt;a href=&quot;http://tools.taskcluster.net/pulse-inspector&quot;&gt;pulse-inspector&lt;/a&gt; compatible with the new events, and then have both deployed into production.&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html">With the testing framework almost ready, this week involved using what is called fake listening in testing to make it independent of the internet.</summary></entry><entry><title type="html">All Hands and after effects</title><link href="http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html" rel="alternate" type="text/html" title="All Hands and after effects" /><published>2018-06-23T09:00:00+05:30</published><updated>2018-06-23T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/23/gsoc-week-5-and-6</id><content type="html" xml:base="http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html">&lt;p&gt;This is my report for the &lt;a href=&quot;https://wiki.mozilla.org/All_Hands/SanFrancisco2018&quot;&gt;All Hands&lt;/a&gt; “Work Week” and one after. It was an absolute wonderful experience flying to the US for the first time. Everything from stay to movie nights, was taken care of the guys at Mozilla. I must say I worked more than I’d hoped to in &lt;a href=&quot;https://thebolditalic.com/don-t-call-it-frisco-the-history-of-san-francisco-s-nicknames-the-bold-italic-san-francisco-5c14348d49c&quot;&gt;SanFrisco&lt;/a&gt; (yeah thats what they call their city, or SF or just Frisco) thanks to the frequent lobby sittings and Coding sprints we had during the week. Coding together can be quite productive, contrary to what I used to think.&lt;/p&gt;
+I am leaving today for a family vacation to Ladakh. I will not be able to work due to poor network connectivity in these areas. I still have to get the [pulse-inspector](http://tools.taskcluster.net/pulse-inspector) compatible with the new events, and then have both deployed into production.</content><author><name>Dreamer</name></author><summary type="html">With the testing framework almost ready, this week involved using what is called fake listening in testing to make it independent of the internet.</summary></entry><entry><title type="html">All Hands and after effects</title><link href="http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html" rel="alternate" type="text/html" title="All Hands and after effects" /><published>2018-06-23T09:00:00+05:30</published><updated>2018-06-23T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/23/gsoc-week-5-and-6</id><content type="html" xml:base="http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html">This is my report for the [All Hands](https://wiki.mozilla.org/All_Hands/SanFrancisco2018) &quot;Work Week&quot; and one after. It was an absolute wonderful experience flying to the US for the first time. Everything from stay to movie nights, was taken care of the guys at Mozilla. I must say I worked more than I'd hoped to in [SanFrisco](https://thebolditalic.com/don-t-call-it-frisco-the-history-of-san-francisco-s-nicknames-the-bold-italic-san-francisco-5c14348d49c) (yeah thats what they call their city, or SF or just Frisco) thanks to the frequent lobby sittings and Coding sprints we had during the week. Coding together can be quite productive, contrary to what I used to think.
 
-&lt;h2 id=&quot;my-time-in-san-francisco-ca&quot;&gt;My time in San Francisco, CA&lt;/h2&gt;
+## My time in San Francisco, CA
 
-&lt;p&gt;It was only one week, but truly amazing. Right from meeting so many people I had worked with, to going out together, various discussions on Taskcluster to hacking together with &lt;a href=&quot;https://mozillians.org/en-US/u/jonasfj/&quot;&gt;Jonas&lt;/a&gt;, &lt;a href=&quot;https://mozillians.org/en-US/u/dustin/&quot;&gt;Dustin&lt;/a&gt; and the team. All Hands is the best part of doing a GSoC with Mozilla. I along with two other volunteers biked to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Golden_Gate_Bridge&quot;&gt;Golden Gate Bridge&lt;/a&gt; and took the ferry back.&lt;/p&gt;
+It was only one week, but truly amazing. Right from meeting so many people I had worked with, to going out together, various discussions on Taskcluster to hacking together with [Jonas](https://mozillians.org/en-US/u/jonasfj/), [Dustin](https://mozillians.org/en-US/u/dustin/) and the team. All Hands is the best part of doing a GSoC with Mozilla. I along with two other volunteers biked to the [Golden Gate Bridge](https://en.wikipedia.org/wiki/Golden_Gate_Bridge) and took the ferry back. 
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/sf_allhands_0.jpg&quot; alt=&quot;sf_allhands0&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+![sf_allhands0]({{site.url}}/assets/sf_allhands_0.jpg){: .center-image}
 
-&lt;p&gt;This is the team pic we clicked at the Conservatory of Flowers
-&lt;img src=&quot;http://localhost:4000/assets/sf_allhands_1.jpg&quot; alt=&quot;sf_allhands1&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+This is the team pic we clicked at the Conservatory of Flowers
+![sf_allhands1]({{site.url}}/assets/sf_allhands_1.jpg){: .center-image}
 
-&lt;p&gt;Towards the end, we got to know that Jonas was leaving the company (he got an offer from a tech company which started as a PhD project). &lt;a href=&quot;https://mozillians.org/en-US/u/bstack/&quot;&gt;Brian&lt;/a&gt; will now be my mentor for the rest of the project. In the next video conference, we had to get him up to speed with what had been done and what was next so that I could complete my project on time.&lt;/p&gt;
+Towards the end, we got to know that Jonas was leaving the company (he got an offer from a tech company which started as a PhD project). [Brian](https://mozillians.org/en-US/u/bstack/) will now be my mentor for the rest of the project. In the next video conference, we had to get him up to speed with what had been done and what was next so that I could complete my project on time. 
 
-&lt;h2 id=&quot;work-on-src&quot;&gt;Work on src/&lt;/h2&gt;
 
-&lt;p&gt;I completed the function for input validation to make sure we do not send badly formatted requests to the Pulse server, and all cases of bad input are resolved by events itself.&lt;/p&gt;
+## Work on src/
 
-&lt;p&gt;Another problem I discovered was that the &lt;a href=&quot;https://www.w3.org/TR/2009/WD-eventsource-20090421/#eventsource&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EventSource&lt;/code&gt;&lt;/a&gt; client tries to reconnect automatically everytime the connection is closed by the server. We want to avoid such unnecessary requests. It also sets a &lt;code class=&quot;highlighter-rouge&quot;&gt;Last-Event-Id&lt;/code&gt; header which we can exploit. So every event had id &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt;, and on every new connection if the &lt;code class=&quot;highlighter-rouge&quot;&gt;Last-Event-Id&lt;/code&gt; header is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; , we report an error and close the connection, thus saving resources.&lt;/p&gt;
+I completed the function for input validation to make sure we do not send badly formatted requests to the Pulse server, and all cases of bad input are resolved by events itself. 
 
-&lt;h2 id=&quot;work-on-testing&quot;&gt;Work on testing&lt;/h2&gt;
+Another problem I discovered was that the [`EventSource`](https://www.w3.org/TR/2009/WD-eventsource-20090421/#eventsource) client tries to reconnect automatically everytime the connection is closed by the server. We want to avoid such unnecessary requests. It also sets a `Last-Event-Id` header which we can exploit. So every event had id `-`, and on every new connection if the `Last-Event-Id` header is set to `-` , we report an error and close the connection, thus saving resources.
 
-&lt;p&gt;The biggest outcome of these two weeks was I had a somewhat stable &lt;a href=&quot;https://www.npmjs.com/package/mocha&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mocha&lt;/code&gt;&lt;/a&gt; testing framework. A significant part of the latter week was spent in making sure making the code more reusable so that new tests do not have a lot of copied code. I no longer have to run the server on one bash instance and my client on another. Also wrote a few tests for checking input validation, invalid exchanges and successful connections.&lt;/p&gt;
+## Work on testing
 
-&lt;h2 id=&quot;finally-deployed-somewhere&quot;&gt;Finally deployed somewhere&lt;/h2&gt;
+The biggest outcome of these two weeks was I had a somewhat stable [`mocha`](https://www.npmjs.com/package/mocha) testing framework. A significant part of the latter week was spent in making sure making the code more reusable so that new tests do not have a lot of copied code. I no longer have to run the server on one bash instance and my client on another. Also wrote a few tests for checking input validation, invalid exchanges and successful connections.
 
-&lt;p&gt;Jonas set me up with a heroku staging environment at &lt;code class=&quot;highlighter-rouge&quot;&gt;https://taskcluster-events-staging.herokuapp.com/&lt;/code&gt; under the mozillacorporation account. And I was quick to deploy. This also helped him and others to test my changes quickly and easily.&lt;/p&gt;
+## Finally deployed somewhere
 
-&lt;h2 id=&quot;whats-ahead&quot;&gt;What’s Ahead&lt;/h2&gt;
+Jonas set me up with a heroku staging environment at `https://taskcluster-events-staging.herokuapp.com/` under the mozillacorporation account. And I was quick to deploy. This also helped him and others to test my changes quickly and easily.
 
-&lt;p&gt;The next task is to get this PR merged. Next thing is to upgrade to use fake listening( more on it next week). Then I will start working on the client implementation that is &lt;a href=&quot;tools.taskcluster.net/pulse-inspector&quot;&gt;pulse-inspector&lt;/a&gt; in &lt;a href=&quot;http://github.com/taskcluster/taskcluster-tools&quot;&gt;‘tc-tools’&lt;/a&gt;. That will then leave me with getting this deployed to &lt;code class=&quot;highlighter-rouge&quot;&gt;events.taskcluster.net&lt;/code&gt;. Till then…&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html">This is my report for the All Hands “Work Week” and one after. It was an absolute wonderful experience flying to the US for the first time. Everything from stay to movie nights, was taken care of the guys at Mozilla. I must say I worked more than I’d hoped to in SanFrisco (yeah thats what they call their city, or SF or just Frisco) thanks to the frequent lobby sittings and Coding sprints we had during the week. Coding together can be quite productive, contrary to what I used to think.</summary></entry><entry><title type="html">GSoC Week 4 : Pre All Hands</title><link href="http://localhost:4000/2018/06/09/gsoc-week-4.html" rel="alternate" type="text/html" title="GSoC Week 4 : Pre All Hands " /><published>2018-06-09T09:00:00+05:30</published><updated>2018-06-09T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/09/gsoc-week-4</id><content type="html" xml:base="http://localhost:4000/2018/06/09/gsoc-week-4.html">&lt;p&gt;My flight to Kolkata at 22:10 finally departed at 6:30 the next day. This delay meant the next day was totally wasted. This week I couldn’t work as much I’d hoped to. I could only manage a total of 3 commits and here are the details-&lt;/p&gt;
+## What's Ahead
 
-&lt;h2 id=&quot;connection-to-pulse&quot;&gt;Connection to Pulse&lt;/h2&gt;
+The next task is to get this PR merged. Next thing is to upgrade to use fake listening( more on it next week). Then I will start working on the client implementation that is [pulse-inspector](tools.taskcluster.net/pulse-inspector) in ['tc-tools'](http://github.com/taskcluster/taskcluster-tools). That will then leave me with getting this deployed to `events.taskcluster.net`. Till then...</content><author><name>Dreamer</name></author><summary type="html">This is my report for the All Hands “Work Week” and one after. It was an absolute wonderful experience flying to the US for the first time. Everything from stay to movie nights, was taken care of the guys at Mozilla. I must say I worked more than I’d hoped to in SanFrisco (yeah thats what they call their city, or SF or just Frisco) thanks to the frequent lobby sittings and Coding sprints we had during the week. Coding together can be quite productive, contrary to what I used to think.</summary></entry><entry><title type="html">GSoC Week 4 : Pre All Hands</title><link href="http://localhost:4000/2018/06/09/gsoc-week-4.html" rel="alternate" type="text/html" title="GSoC Week 4 : Pre All Hands " /><published>2018-06-09T09:00:00+05:30</published><updated>2018-06-09T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/09/gsoc-week-4</id><content type="html" xml:base="http://localhost:4000/2018/06/09/gsoc-week-4.html">My flight to Kolkata at 22:10 finally departed at 6:30 the next day. This delay meant the next day was totally wasted. This week I couldn't work as much I'd hoped to. I could only manage a total of 3 commits and here are the details-
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-events&lt;/code&gt; proxy needs to connect to the &lt;code class=&quot;highlighter-rouge&quot;&gt;Pulse&lt;/code&gt; server in order to receive messages. One part of the redeployability efforts I talked about in my blog of the first week, was making this server configurable. This introduced two new parameters, &lt;code class=&quot;highlighter-rouge&quot;&gt;hostname&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vhost&lt;/code&gt;. For internal projects they are &lt;code class=&quot;highlighter-rouge&quot;&gt;pulse.mozilla.org&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; respectively. I incorrectly set &lt;code class=&quot;highlighter-rouge&quot;&gt;vhost&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;5781&lt;/code&gt; which was actually the port &lt;code class=&quot;highlighter-rouge&quot;&gt;tc-client&lt;/code&gt; was using.&lt;/p&gt;
+## Connection to Pulse
 
-&lt;p&gt;With this thing corrected, I could successfully receive messages and verified it by using the test file I created.&lt;/p&gt;
+The `tc-events` proxy needs to connect to the `Pulse` server in order to receive messages. One part of the redeployability efforts I talked about in my blog of the first week, was making this server configurable. This introduced two new parameters, `hostname` and `vhost`. For internal projects they are `pulse.mozilla.org` and `/` respectively. I incorrectly set `vhost` to `5781` which was actually the port `tc-client` was using.
 
-&lt;h2 id=&quot;closing-remotely&quot;&gt;Closing remotely&lt;/h2&gt;
+With this thing corrected, I could successfully receive messages and verified it by using the test file I created.
 
-&lt;p&gt;I had used &lt;code class=&quot;highlighter-rouge&quot;&gt;res.on('close',abort())&lt;/code&gt; to end the connection from server side when client terminated abruptly.
-But the server crashed everytime. Turns out the response object &lt;code class=&quot;highlighter-rouge&quot;&gt;res&lt;/code&gt; doesn’t have a &lt;code class=&quot;highlighter-rouge&quot;&gt;close&lt;/code&gt; event , the request object &lt;code class=&quot;highlighter-rouge&quot;&gt;req&lt;/code&gt; does. So &lt;code class=&quot;highlighter-rouge&quot;&gt;req.on('close', abort())&lt;/code&gt; was the right thing to do. This ensured server handles it smoothly without crashing.&lt;/p&gt;
+## Closing remotely
 
-&lt;h2 id=&quot;coming-up&quot;&gt;Coming up…&lt;/h2&gt;
+I had used `res.on('close',abort())` to end the connection from server side when client terminated abruptly.
+But the server crashed everytime. Turns out the response object `res` doesn't have a `close` event , the request object `req` does. So `req.on('close', abort())` was the right thing to do. This ensured server handles it smoothly without crashing.
 
-&lt;p&gt;I am leaving for All Hands tomorrow and I wanted to get the above two things done before I leave, so that we can talk about the next steps. It is a pretty long flight. I am very excited to be able to meet Jonas, Dustin and others I have worked with as well as new people. I don’t expect much code to be written in this time, but hope it is a great learning experience. Looking forward to a great week ahead :)&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html">My flight to Kolkata at 22:10 finally departed at 6:30 the next day. This delay meant the next day was totally wasted. This week I couldn’t work as much I’d hoped to. I could only manage a total of 3 commits and here are the details-</summary></entry><entry><title type="html">GSoC Week 3 : Connection Established</title><link href="http://localhost:4000/2018/06/03/gsoc-week-3.html" rel="alternate" type="text/html" title="GSoC Week 3 : Connection Established" /><published>2018-06-03T09:00:00+05:30</published><updated>2018-06-03T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/03/gsoc-week-3</id><content type="html" xml:base="http://localhost:4000/2018/06/03/gsoc-week-3.html">&lt;p&gt;This week, I can safely say has been the most productive yet. The first part of the week was spent in setting up only a &lt;code class=&quot;highlighter-rouge&quot;&gt;ping&lt;/code&gt; message from the server. Towards the end, I managed to pass the bindings to the server and and bind the listener.&lt;/p&gt;
+## Coming up...
 
-&lt;h2 id=&quot;setting-up-connection&quot;&gt;Setting up Connection&lt;/h2&gt;
+I am leaving for All Hands tomorrow and I wanted to get the above two things done before I leave, so that we can talk about the next steps. It is a pretty long flight. I am very excited to be able to meet Jonas, Dustin and others I have worked with as well as new people. I don't expect much code to be written in this time, but hope it is a great learning experience. Looking forward to a great week ahead :)</content><author><name>Dreamer</name></author><summary type="html">My flight to Kolkata at 22:10 finally departed at 6:30 the next day. This delay meant the next day was totally wasted. This week I couldn’t work as much I’d hoped to. I could only manage a total of 3 commits and here are the details-</summary></entry><entry><title type="html">GSoC Week 3 : Connection Established</title><link href="http://localhost:4000/2018/06/03/gsoc-week-3.html" rel="alternate" type="text/html" title="GSoC Week 3 : Connection Established" /><published>2018-06-03T09:00:00+05:30</published><updated>2018-06-03T09:00:00+05:30</updated><id>http://localhost:4000/2018/06/03/gsoc-week-3</id><content type="html" xml:base="http://localhost:4000/2018/06/03/gsoc-week-3.html">This week, I can safely say has been the most productive yet. The first part of the week was spent in setting up only a `ping` message from the server. Towards the end, I managed to pass the bindings to the server and and bind the listener. 
 
-&lt;p&gt;I set up a basic api at &lt;code class=&quot;highlighter-rouge&quot;&gt;/connect/&lt;/code&gt; to send &lt;code class=&quot;highlighter-rouge&quot;&gt;ping&lt;/code&gt; messages at 10s intervals. To check, I was connecting to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:12345/connect&lt;/code&gt;, becuase thats where (I thought) my api was hosted. The browser console gave this error.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Content Security Policy: The page’s settings blocked the loading of a resource at self (“default-src”).&lt;/code&gt;
-The &lt;a href=&quot;https://developers.google.com/web/fundamentals/security/csp/&quot;&gt;CSP&lt;/a&gt; header determines what scripts the user is allowed to load. This is to protect against cross-site scripting attacks (XSS). The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/connect-src&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;connect-src&lt;/code&gt;&lt;/a&gt; directive allows scripts to open SSE connections. However, a bunch of other changes had to be made in order to get it running on the browser. Jonas suggested trying to get everything working with &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; first.&lt;/p&gt;
 
-&lt;p&gt;There I realized that the api was actually at &lt;code class=&quot;highlighter-rouge&quot;&gt;/api/events/v1/connect/&lt;/code&gt;, and there was nothing in the docs to suggest that. All &lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-lib-api&lt;/code&gt; endpoints are at &lt;code class=&quot;highlighter-rouge&quot;&gt;/api/&amp;lt;serviceName&amp;gt;/&amp;lt;version&amp;gt;/&amp;lt;route&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+## Setting up Connection
 
-&lt;h2 id=&quot;handling-server-errors&quot;&gt;Handling Server Errors&lt;/h2&gt;
+I set up a basic api at `/connect/` to send `ping` messages at 10s intervals. To check, I was connecting to `localhost:12345/connect`, becuase thats where (I thought) my api was hosted. The browser console gave this error.
+`Content Security Policy: The page’s settings blocked the loading of a resource at self (“default-src”).`
+The [CSP](https://developers.google.com/web/fundamentals/security/csp/) header determines what scripts the user is allowed to load. This is to protect against cross-site scripting attacks (XSS). The [`connect-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/connect-src) directive allows scripts to open SSE connections. However, a bunch of other changes had to be made in order to get it running on the browser. Jonas suggested trying to get everything working with `curl` first. 
 
-&lt;p&gt;Error handling is crucial in node as it shuts down the server. Hence, I had to wrap most of my code in try-catch. And in cases of error if the head is already written(connection was successfully established) and the request is still open, send an error message, otherwise send a 5xx status code.&lt;/p&gt;
+There I realized that the api was actually at `/api/events/v1/connect/`, and there was nothing in the docs to suggest that. All `taskcluster-lib-api` endpoints are at `/api/&lt;serviceName&gt;/&lt;version&gt;/&lt;route&gt;`.
 
-&lt;p&gt;When client closed the connection remotely, we had to end the response. Jonas gave me a good snippet on how we can use a combination of Promises to solve this problem and avoid the &lt;code class=&quot;highlighter-rouge&quot;&gt;write after end&lt;/code&gt; error.&lt;/p&gt;
+## Handling Server Errors
 
-&lt;h2 id=&quot;work-on-bindings&quot;&gt;Work on bindings&lt;/h2&gt;
+Error handling is crucial in node as it shuts down the server. Hence, I had to wrap most of my code in try-catch. And in cases of error if the head is already written(connection was successfully established) and the request is still open, send an error message, otherwise send a 5xx status code.
 
-&lt;p&gt;Passing bindings through &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; in bash was creating an issue, where the shell would start backgroud process in bash. And I wasn’t able to terminate the connection without closing the server. Thus I wrote a simple client script using &lt;a href=&quot;https://www.npmjs.com/package/eventsource&quot;&gt;EventSource&lt;/a&gt; at &lt;code class=&quot;highlighter-rouge&quot;&gt;test\api_test.js&lt;/code&gt;. Later this will actually contain tests.&lt;/p&gt;
+When client closed the connection remotely, we had to end the response. Jonas gave me a good snippet on how we can use a combination of Promises to solve this problem and avoid the `write after end` error.
 
-&lt;p&gt;Also the json had to be url encoded. I used the &lt;a href=&quot;https://www.npmjs.com/package/urlencode&quot;&gt;urlencode&lt;/a&gt; package. It is essentially translating characters like spaces, braces, etc to a universal representation. For example a space is represented by &lt;code class=&quot;highlighter-rouge&quot;&gt;%20&lt;/code&gt; as you may have observed.&lt;/p&gt;
+## Work on bindings
 
-&lt;p&gt;For now json validation is just a function which returns &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;. I will need to add a check for schema in the coming week.&lt;/p&gt;
+Passing bindings through `curl` in bash was creating an issue, where the shell would start backgroud process in bash. And I wasn't able to terminate the connection without closing the server. Thus I wrote a simple client script using [EventSource](https://www.npmjs.com/package/eventsource) at `test\api_test.js`. Later this will actually contain tests.
 
-&lt;h2 id=&quot;listener&quot;&gt;Listener&lt;/h2&gt;
+Also the json had to be url encoded. I used the [urlencode](https://www.npmjs.com/package/urlencode) package. It is essentially translating characters like spaces, braces, etc to a universal representation. For example a space is represented by `%20` as you may have observed.
 
-&lt;p&gt;I was able to bind the listener, but not receiving messages. Turns out I didn’t give the proper &lt;code class=&quot;highlighter-rouge&quot;&gt;vhost&lt;/code&gt;. This new parameter was also introduced in v10 of &lt;a href=&quot;https://github.com/taskcluster/taskcluster-client&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-client&lt;/code&gt;&lt;/a&gt;. After this, I opened a &lt;a href=&quot;https://github.com/taskcluster/taskcluster-client/pull/96&quot;&gt;PR&lt;/a&gt; to update their docs. Once I know what should &lt;code class=&quot;highlighter-rouge&quot;&gt;vhost&lt;/code&gt; be, I am sure this will work.&lt;/p&gt;
+For now json validation is just a function which returns `true`. I will need to add a check for schema in the coming week.
 
-&lt;h2 id=&quot;coming-up&quot;&gt;Coming up..&lt;/h2&gt;
+## Listener
 
-&lt;p&gt;A complete working listener, and tests. After the &lt;code class=&quot;highlighter-rouge&quot;&gt;listener&lt;/code&gt; is working, we will have to make sure we take care of all errors, and a bit of cleanup. Also, I will be travelling to my hometown this Monday. Hopefully, my productivity doesn’t take a hit!&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html">This week, I can safely say has been the most productive yet. The first part of the week was spent in setting up only a ping message from the server. Towards the end, I managed to pass the bindings to the server and and bind the listener.</summary></entry><entry><title type="html">GSoC Week 1 and 2 : A New Beginning</title><link href="http://localhost:4000/2018/05/26/gsoc-week-1-and-2.html" rel="alternate" type="text/html" title="GSoC Week 1 and 2 : A New Beginning" /><published>2018-05-26T09:00:00+05:30</published><updated>2018-05-26T09:00:00+05:30</updated><id>http://localhost:4000/2018/05/26/gsoc-week-1-and-2</id><content type="html" xml:base="http://localhost:4000/2018/05/26/gsoc-week-1-and-2.html">&lt;p&gt;These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one. I started watching &lt;strong&gt;Star Wars&lt;/strong&gt; back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.&lt;/p&gt;
+I was able to bind the listener, but not receiving messages. Turns out I didn't give the proper `vhost`. This new parameter was also introduced in v10 of [`taskcluster-client`](https://github.com/taskcluster/taskcluster-client). After this, I opened a [PR](https://github.com/taskcluster/taskcluster-client/pull/96) to update their docs. Once I know what should `vhost` be, I am sure this will work.
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/star-wars.jpg&quot; alt=&quot;star-wars&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+## Coming up..
 
-&lt;h2 id=&quot;major-changes&quot;&gt;Major Changes&lt;/h2&gt;
+A complete working listener, and tests. After the `listener` is working, we will have to make sure we take care of all errors, and a bit of cleanup. Also, I will be travelling to my hometown this Monday. Hopefully, my productivity doesn't take a hit!</content><author><name>Dreamer</name></author><summary type="html">This week, I can safely say has been the most productive yet. The first part of the week was spent in setting up only a ping message from the server. Towards the end, I managed to pass the bindings to the server and and bind the listener.</summary></entry><entry><title type="html">GSoC Week 1 and 2 : A New Beginning</title><link href="http://localhost:4000/2018/05/26/gsoc-week-1-and-2.html" rel="alternate" type="text/html" title="GSoC Week 1 and 2 : A New Beginning" /><published>2018-05-26T09:00:00+05:30</published><updated>2018-05-26T09:00:00+05:30</updated><id>http://localhost:4000/2018/05/26/gsoc-week-1-and-2</id><content type="html" xml:base="http://localhost:4000/2018/05/26/gsoc-week-1-and-2.html">These have been quite eventful two weeks. I am writing two weeks together beacuse there isn't much to write about week one. I started watching **Star Wars** back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.
 
-&lt;p&gt;In the first chat I had with &lt;a href=&quot;https://mozillians.org/en-US/u/jonasfj/&quot;&gt;Jonas&lt;/a&gt;, post selection, he told me about this new technology, &lt;strong&gt;Server Sent Events&lt;/strong&gt;, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it) in a lot of places. The &lt;a href=&quot;https://developer.mozilla.org/en-US/&quot;&gt;Mozilla Developer Network&lt;/a&gt; had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge &lt;a href=&quot;https://caniuse.com/#feat=eventsource&quot;&gt;dont support&lt;/a&gt; it as yet, but there are &lt;a href=&quot;https://github.com/Yaffle/EventSource&quot;&gt;polyfills&lt;/a&gt; for that, so all good.&lt;/p&gt;
+![star-wars]({{site.url}}/assets/star-wars.jpg){: .center-image}
 
-&lt;p&gt;After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, and needs a separate blogpost to explain it. This trims down my project even further, which means I can get to &lt;a href=&quot;https://github.com/taskcluster/taskcluster-github/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-github&lt;/code&gt;&lt;/a&gt; or r14y bugs faster :)&lt;/p&gt;
+## Major Changes
 
-&lt;h2 id=&quot;server-sent-events&quot;&gt;Server Sent Events&lt;/h2&gt;
+In the first chat I had with [Jonas](https://mozillians.org/en-US/u/jonasfj/), post selection, he told me about this new technology, **Server Sent Events**, which can essentially replace Websockets(which we initially planned to use, and my proposal was based on it) in a lot of places. The [Mozilla Developer Network][mdn] had advised him to use it. I will elaborate on what is SSE as we go on. A major advantage was that client side implementation becomes really simple. But this also means, we will have to write it again. Some browsers like the Microsoft Edge [dont support](https://caniuse.com/#feat=eventsource) it as yet, but there are [polyfills](https://github.com/Yaffle/EventSource) for that, so all good.
 
-&lt;p&gt;As the name suggests, it is speifically designed for the purpose of sending notifications / messagges from the server. The server maintains an event stream which is nothing more than a &lt;strong&gt;simple text stream&lt;/strong&gt; over an http connection. It is essentially a one way channel flowing from server to client only, unlike Websockets where two way commmunication is possible. The downside is that the connection has to be kept open for as long as you want to receive messages. The docs here. Each message has four fields, &lt;code class=&quot;highlighter-rouge&quot;&gt;event&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;retry&lt;/code&gt;, and two messages are separated by a newlline &lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;. All other fields are ignored by &lt;code class=&quot;highlighter-rouge&quot;&gt;text/event-stream&lt;/code&gt;. So our event stream looks something like this -&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;event: pulse-ready\n
+After much deliberation, we have decided to drop the automatic reconnect feature, because it allows us to be more  relaible and robust, without leaking resources. It took a while for me to understand the thought behind it, and needs a separate blogpost to explain it. This trims down my project even further, which means I can get to [`taskcluster-github`][tc-gh] or r14y bugs faster :)
+
+
+## Server Sent Events
+
+As the name suggests, it is speifically designed for the purpose of sending notifications / messagges from the server. The server maintains an event stream which is nothing more than a **simple text stream** over an http connection. It is essentially a one way channel flowing from server to client only, unlike Websockets where two way commmunication is possible. The downside is that the connection has to be kept open for as long as you want to receive messages. The docs here. Each message has four fields, `event`, `id`, `data`, `retry`, and two messages are separated by a newlline `\n`. All other fields are ignored by `text/event-stream`. So our event stream looks something like this -
+```
+event: pulse-ready\n
 data: {message: &quot;we are now actively listening&quot;} \n
 \n
 event: pulse-message\n
 data: {....} \n
-id: &amp;lt;AMQP-message-id&amp;gt; \n
+id: &lt;AMQP-message-id&gt; \n
 \n
 event: pulse-message\n
 data: {...} \n
-id: &amp;lt;AMQP-message-id&amp;gt; \n
+id: &lt;AMQP-message-id&gt; \n
 \n
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+```
 
-&lt;p&gt;The client side code becomes as simple as this  -&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var source = new EventSource('URL');
+The client side code becomes as simple as this  - 
+```
+var source = new EventSource('URL');
 
     // handle messages
     source.onmessage = function(event) {
         // Do something with the data:
         event.data;
     };
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Read more about Server Sent Events and its implementation &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+```
+Read more about Server Sent Events and its implementation [here][mdn-sse]
 
-&lt;h2 id=&quot;alternatives-in-the-past&quot;&gt;Alternatives in the past&lt;/h2&gt;
+## Alternatives in the past
 
-&lt;p&gt;The most widely used alternative were Websockets. Historically, the way to receive information is to ask for it, and this is called Polling. A slight variant is Long Polling in which the server holds the request until it has new data to send. However it has several issues like high latency and overloading the server. I found the image below immmensely helpful and also the blogs &lt;a href=&quot;https://streamdata.io/blog/server-sent-events/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://www.smashingmagazine.com/2018/02/sse-websockets-data-flow-http2/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+The most widely used alternative were Websockets. Historically, the way to receive information is to ask for it, and this is called Polling. A slight variant is Long Polling in which the server holds the request until it has new data to send. However it has several issues like high latency and overloading the server. I found the image below immmensely helpful and also the blogs [here](https://streamdata.io/blog/server-sent-events/) and [here](https://www.smashingmagazine.com/2018/02/sse-websockets-data-flow-http2/).
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/sse.png&quot; alt=&quot;sse&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+![sse]({{site.url}}/assets/sse.png ){: .center-image}
 
-&lt;h2 id=&quot;what-have-i-done-&quot;&gt;What have I done ?&lt;/h2&gt;
+## What have I done ?
 
-&lt;p&gt;The first week went by reading documentations and trying to get SSE working locally. Jonas advised me to take a look at &lt;a href=&quot;https://github.com/taskcluster/taskcluster-queue/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-queue&lt;/code&gt;&lt;/a&gt; and structure my code in a similar way. It is really well written and Jonas told me he’d done long polling in it, which is awesome. I started out with &lt;a href=&quot;https://github.com/taskcluster/taskcluster-events/pull/6&quot;&gt;this&lt;/a&gt; PR. It has only 13 commits as of now. I am using various &lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-lib-*&lt;/code&gt; libraries, which is the standard.&lt;/p&gt;
+The first week went by reading documentations and trying to get SSE working locally. Jonas advised me to take a look at [`taskcluster-queue`](https://github.com/taskcluster/taskcluster-queue/) and structure my code in a similar way. It is really well written and Jonas told me he'd done long polling in it, which is awesome. I started out with [this](https://github.com/taskcluster/taskcluster-events/pull/6) PR. It has only 13 commits as of now. I am using various `taskcluster-lib-*` libraries, which is the standard. 
 
-&lt;p&gt;There is a major update of all libraries going on to use &lt;code class=&quot;highlighter-rouge&quot;&gt;rootUrl&lt;/code&gt;, as part of a bigger Redeploability initiative, to make Taskcluster easy to use for people both inside and outside of the Mozilla network. Here are the trackers - &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1427839&quot;&gt;Internal Redpeployability&lt;/a&gt;, &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1427838&quot;&gt;External Redeployability&lt;/a&gt;. The extensive list of r14y bugs are &lt;a href=&quot;https://bugzilla.mozilla.org/buglist.cgi?quicksearch=redeployability&amp;amp;list_id=14167797&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+There is a major update of all libraries going on to use `rootUrl`, as part of a bigger Redeploability initiative, to make Taskcluster easy to use for people both inside and outside of the Mozilla network. Here are the trackers - [Internal Redpeployability](https://bugzilla.mozilla.org/show_bug.cgi?id=1427839), [External Redeployability](https://bugzilla.mozilla.org/show_bug.cgi?id=1427838). The extensive list of r14y bugs are [here](https://bugzilla.mozilla.org/buglist.cgi?quicksearch=redeployability&amp;list_id=14167797).
 
-&lt;h2 id=&quot;how-does-it-affect-my-project-&quot;&gt;How does it affect my project ?&lt;/h2&gt;
 
-&lt;p&gt;I had originally written the code using the same versions as in &lt;a href=&quot;https://github.com/taskcluster/taskcluster-queue/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-queue&lt;/code&gt;&lt;/a&gt;. Jonas told me to update to v10 as all &lt;code class=&quot;highlighter-rouge&quot;&gt;tascluster-lib-*&lt;/code&gt; had been bumped up to reflect major changes in specification. For example &lt;a href=&quot;https://github.com/taskcluster/taskcluster-lib-loader/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-lib-loader&lt;/code&gt;&lt;/a&gt; went from v2.0.0 to v10.0.0&lt;/p&gt;
 
-&lt;p&gt;I have since had to make changes, which has slowed down my work. Jonas came up with this idea that we should use &lt;a href=&quot;https://github.com/taskcluster/taskcluster-lib-api/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;taskcluster-lib-api&lt;/code&gt;&lt;/a&gt; to create an API endpoint which we can use (or in some ways abuse) for our needs. The client can send a GET request to this endpoint to establish a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Keep-Alive&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;keep-alive&lt;/code&gt;&lt;/a&gt; connection.&lt;/p&gt;
+## How does it affect my project ?
 
-&lt;p&gt;I am unable to a successful build at the moment. I will be coordinating with &lt;a href=&quot;https://mozillians.org/en-US/u/dustin/&quot;&gt;Dustin&lt;/a&gt; about the latest changes, which haven’t yet made it to the docs.&lt;/p&gt;
+I had originally written the code using the same versions as in [`taskcluster-queue`](https://github.com/taskcluster/taskcluster-queue/). Jonas told me to update to v10 as all `tascluster-lib-*` had been bumped up to reflect major changes in specification. For example [`taskcluster-lib-loader`](https://github.com/taskcluster/taskcluster-lib-loader/) went from v2.0.0 to v10.0.0 
 
-&lt;h2 id=&quot;coming-up&quot;&gt;Coming up&lt;/h2&gt;
+I have since had to make changes, which has slowed down my work. Jonas came up with this idea that we should use [`taskcluster-lib-api`](https://github.com/taskcluster/taskcluster-lib-api/) to create an API endpoint which we can use (or in some ways abuse) for our needs. The client can send a GET request to this endpoint to establish a [`keep-alive`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Keep-Alive) connection. 
 
-&lt;p&gt;First on my list is to get this thing running. After that, I will have to create a &lt;code class=&quot;highlighter-rouge&quot;&gt;docs/&lt;/code&gt; folder to document the endpoint. Then, write a few simple tests and at the same time add &lt;a href=&quot;https://github.com/taskcluster/taskcluster-client#using-the-listener&quot;&gt;PulseListener&lt;/a&gt;.&lt;/p&gt;
+I am unable to a successful build at the moment. I will be coordinating with [Dustin](https://mozillians.org/en-US/u/dustin/) about the latest changes, which haven't yet made it to the docs. 
 
-&lt;h2 id=&quot;other-news&quot;&gt;Other news&lt;/h2&gt;
+##  Coming up
 
-&lt;p&gt;I was lucky enough to have gotten my visa interview in such quick time. I finally received my US visa to be able to travel to San Francisco for &lt;a href=&quot;https://wiki.mozilla.org/All_Hands/&quot;&gt;All Hands&lt;/a&gt;. I will be leaving on June 11. I will have to complete the thing above if I am stay on schedule.&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html">These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one. I started watching Star Wars back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.</summary></entry><entry><title type="html">GSoC Selection</title><link href="http://localhost:4000/2018/05/01/gsoc-selection.html" rel="alternate" type="text/html" title="GSoC Selection" /><published>2018-05-01T13:45:53+05:30</published><updated>2018-05-01T13:45:53+05:30</updated><id>http://localhost:4000/2018/05/01/gsoc-selection</id><content type="html" xml:base="http://localhost:4000/2018/05/01/gsoc-selection.html">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/gsoc_cover.png&quot; alt=&quot;gsoc&quot; title=&quot;Google Summer of Code&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+First on my list is to get this thing running. After that, I will have to create a `docs/` folder to document the endpoint. Then, write a few simple tests and at the same time add [PulseListener](https://github.com/taskcluster/taskcluster-client#using-the-listener).
 
-&lt;p&gt;This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for &lt;a href=&quot;https://summerofcode.withgoogle.com/&quot;&gt;Google Summer of Code 2018&lt;/a&gt; with Mozilla has been accepted. Here I will write about how I started contributing to Mozilla and open source in general and then a bit on my project and what’s ahead for the summers.&lt;/p&gt;
+## Other news
 
-&lt;h2 id=&quot;a-little-prep&quot;&gt;A Little Prep&lt;/h2&gt;
+I was lucky enough to have gotten my visa interview in such quick time. I finally received my US visa to be able to travel to San Francisco for [All Hands](https://wiki.mozilla.org/All_Hands/). I will be leaving on June 11. I will have to complete the thing above if I am stay on schedule.
 
-&lt;p&gt;The title of my project is &lt;strong&gt;Improved Taskcluster Pulse Backend&lt;/strong&gt;. I will be working within &lt;a href=&quot;https://docs.taskcluster.net/&quot;&gt;Taskcluster&lt;/a&gt; team to
-rewrite tascluster-events. &lt;a href=&quot;https://wiki.mozilla.org/Auto-tools/Projects/Pulse&quot;&gt;Pulse&lt;/a&gt; is a system to exchange messages, giving more visibility to Mozilla’s tools and allowing for more dynamic and informative tools. It follows a publisher-subscriber pattern whereby a publisher can send messages to a topic exchange and consumers can create queues to bind to thses exchanges.&lt;/p&gt;
 
-&lt;p&gt;Each message is published with a routing key. The structure is something similar to different threads in a subreddit. Subscribers can specify which exhange and route they want to subscribe to. All if this is managed by a &lt;a href=&quot;https://www.rabbitmq.com/&quot;&gt;RabbitMQ&lt;/a&gt; server at &lt;code class=&quot;highlighter-rouge&quot;&gt;pulse.mozilla.org&lt;/code&gt;&lt;/p&gt;
+[mdn]: https://developer.mozilla.org/en-US/
+[mdn-sse]:  https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+[tc-gh]: https://github.com/taskcluster/taskcluster-github/</content><author><name>Dreamer</name></author><summary type="html">These have been quite eventful two weeks. I am writing two weeks together beacuse there isn’t much to write about week one. I started watching Star Wars back then and was instantly hooked. I am already done with The Original and The Prequel trilogies, and probably ended up with a little guilt too :P. Now coming back to the important stuff.</summary></entry><entry><title type="html">GSoC Selection</title><link href="http://localhost:4000/2018/05/01/gsoc-selection.html" rel="alternate" type="text/html" title="GSoC Selection" /><published>2018-05-01T13:45:53+05:30</published><updated>2018-05-01T13:45:53+05:30</updated><id>http://localhost:4000/2018/05/01/gsoc-selection</id><content type="html" xml:base="http://localhost:4000/2018/05/01/gsoc-selection.html">![gsoc]({{site.url}}/assets/gsoc_cover.png &quot;Google Summer of Code&quot;){: .center-image}
 
-&lt;h2 id=&quot;what-will-i-be-doing&quot;&gt;What will I be doing?&lt;/h2&gt;
+This semester finally ended with some great news and that is reason enough to write my first blogpost. My proposal for [Google Summer of Code 2018][gsoc] with Mozilla has been accepted. Here I will write about how I started contributing to Mozilla and open source in general and then a bit on my project and what's ahead for the summers.
 
-&lt;p&gt;Communication becomes more and more important as the project becomes larger. The web-client, &lt;a href=&quot;https://tools.taskcluster.net/pulse-inspector&quot;&gt;Pulse Inspector&lt;/a&gt; is a tool to verify that messages being published are being handled correctly to their specified route, and they end up in receiver queues.&lt;/p&gt;
+## A Little Prep 
 
-&lt;p&gt;Coming back to taskcluster-events. It is a service for web clients to listen to pulse messages. &lt;strong&gt;RabbitMQ uses &lt;a href=&quot;https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol&quot;&gt;AMQP&lt;/a&gt;&lt;/strong&gt; and connections from browsers are usually &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;tcp&lt;/a&gt;, making it harder for web clients to directly use RabbitMQ.
-Tascluster-events solves the problem by using Websockets, and creating RabbitMQ queue for each Websocket connection and pushes messages from the queue to the websocket. It is old and poorly designed. My job will be to completely rebuild taskcluster-events from scratch, ensuring it is robust and free of major bugs or failures.&lt;/p&gt;
+The title of my project is **Improved Taskcluster Pulse Backend**. I will be working within [Taskcluster](https://docs.taskcluster.net/) team to
+rewrite tascluster-events. [Pulse][pulse] is a system to exchange messages, giving more visibility to Mozilla's tools and allowing for more dynamic and informative tools. It follows a publisher-subscriber pattern whereby a publisher can send messages to a topic exchange and consumers can create queues to bind to thses exchanges. 
 
-&lt;p&gt;I am fortunate to have &lt;strong&gt;Jonas Finnemann Jensen&lt;/strong&gt; (irc: &lt;a href=&quot;https://mozillians.org/en-US/u/jonasfj/&quot;&gt;jonasfj&lt;/a&gt;) as my mentor for this project. Lots to learn from him. The finer details about the project can be found in my proposal &lt;a href=&quot;https://drive.google.com/file/d/1egLVTK9WHlgGaYQfeFiUHMSAnAoLjFTF/view?usp=sharing&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+Each message is published with a routing key. The structure is something similar to different threads in a subreddit. Subscribers can specify which exhange and route they want to subscribe to. All if this is managed by a [RabbitMQ](https://www.rabbitmq.com/) server at `pulse.mozilla.org`
 
-&lt;p&gt;The RFC for this is &lt;a href=&quot;https://github.com/taskcluster/taskcluster-rfcs/pull/104&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;plan-for-ahead&quot;&gt;Plan for Ahead&lt;/h2&gt;
 
-&lt;p&gt;Well, vacations always start with a lot of plans in mind. I will have to go over my proposal again, owing to the recently concluded end semester exams. I aim to be proficient in javascript by the end of it. Coding phase begins next week, but I want to have my environment and repository ready before that. This blog will primarily be used to document any progress I make on my project, making it easier to revisit in the future. Looking forward to an exciting summer and ahead !!&lt;/p&gt;</content><author><name>Dreamer</name></author><summary type="html"></summary></entry></feed>
+## What will I be doing?
+
+Communication becomes more and more important as the project becomes larger. The web-client, [Pulse Inspector](https://tools.taskcluster.net/pulse-inspector) is a tool to verify that messages being published are being handled correctly to their specified route, and they end up in receiver queues.
+
+Coming back to taskcluster-events. It is a service for web clients to listen to pulse messages. **RabbitMQ uses [AMQP](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol)** and connections from browsers are usually [tcp](https://en.wikipedia.org/wiki/Transmission_Control_Protocol), making it harder for web clients to directly use RabbitMQ.
+Tascluster-events solves the problem by using Websockets, and creating RabbitMQ queue for each Websocket connection and pushes messages from the queue to the websocket. It is old and poorly designed. My job will be to completely rebuild taskcluster-events from scratch, ensuring it is robust and free of major bugs or failures.
+
+I am fortunate to have **Jonas Finnemann Jensen** (irc: [jonasfj](https://mozillians.org/en-US/u/jonasfj/)) as my mentor for this project. Lots to learn from him. The finer details about the project can be found in my proposal [here][proposal]
+
+The RFC for this is [here][rfc]
+
+## Plan for Ahead
+
+Well, vacations always start with a lot of plans in mind. I will have to go over my proposal again, owing to the recently concluded end semester exams. I aim to be proficient in javascript by the end of it. Coding phase begins next week, but I want to have my environment and repository ready before that. This blog will primarily be used to document any progress I make on my project, making it easier to revisit in the future. Looking forward to an exciting summer and ahead !!
+
+
+
+
+[gsoc]: https://summerofcode.withgoogle.com/
+[proposal]:   https://drive.google.com/file/d/1egLVTK9WHlgGaYQfeFiUHMSAnAoLjFTF/view?usp=sharing
+[rfc]: https://github.com/taskcluster/taskcluster-rfcs/pull/104
+[pulse]:https://wiki.mozilla.org/Auto-tools/Projects/Pulse</content><author><name>Dreamer</name></author><summary type="html"></summary></entry></feed>
