@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Yashvardhan-All Hands and after effects</title>
-  <meta name="description" content="This is my report for the All Hands “Work Week” and one after. It was an absolute wonderful experience flying to the US for the first time. Everything from s...">
+  <title>Yashvardhan-The past year, and half</title>
+  <meta name="description" content="This year is almost ending. Although there is no reason to believe that anything will magically become better come 2021, all of us tend to make some promises...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html">
+  <link rel="canonical" href="http://localhost:4000/2020/12/31/the-past-year-and-half.html">
   <link rel="alternate" type="application/rss+xml" title="Yashvardhan Didwania" href="/feed.xml">
   <link rel="icon" href="http://localhost:4000/favicon.ico" />
 
@@ -81,47 +81,47 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">All Hands and after effects</h1>
+    <h1 class="post-title" itemprop="name headline">The past year, and half</h1>
     <p class="post-meta">
-      <time datetime="2018-06-23T09:00:00+05:30" itemprop="datePublished">
+      <time datetime="2020-12-31T16:15:53+05:30" itemprop="datePublished">
         
-        Jun 23, 2018
+        Dec 31, 2020
       </time>
       </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>This is my report for the <a href="https://wiki.mozilla.org/All_Hands/SanFrancisco2018">All Hands</a> “Work Week” and one after. It was an absolute wonderful experience flying to the US for the first time. Everything from stay to movie nights, was taken care of the guys at Mozilla. I must say I worked more than I’d hoped to in <a href="https://thebolditalic.com/don-t-call-it-frisco-the-history-of-san-francisco-s-nicknames-the-bold-italic-san-francisco-5c14348d49c">SanFrisco</a> (yeah thats what they call their city, or SF or just Frisco) thanks to the frequent lobby sittings and Coding sprints we had during the week. Coding together can be quite productive, contrary to what I used to think.</p>
+    <p>This year is almost ending. Although there is no reason to believe that anything will magically become better come 2021, all of us tend to make some promises to ourselves that we hope to keep at least for a year. 2020 has turned out to be truly transformative for me and I want to take this opportunity to write down all my learnings from this year and set some new goals for the next 365 days. So let’s get started…</p>
 
-<h2 id="my-time-in-san-francisco-ca">My time in San Francisco, CA</h2>
+<h2 id="the-half">The half</h2>
 
-<p>It was only one week, but truly amazing. Right from meeting so many people I had worked with, to going out together, various discussions on Taskcluster to hacking together with <a href="https://mozillians.org/en-US/u/jonasfj/">Jonas</a>, <a href="https://mozillians.org/en-US/u/dustin/">Dustin</a> and the team. All Hands is the best part of doing a GSoC with Mozilla. I along with two other volunteers biked to the <a href="https://en.wikipedia.org/wiki/Golden_Gate_Bridge">Golden Gate Bridge</a> and took the ferry back.</p>
+<p>I had never read a book from start to finish. On my summer intern in Japan in 2019, being without internet during long train rides provided the perfect opportunity. With numerous failed attempts at reading fiction, I took up a short non-fiction <em>Screw it let’s do it by Ric Branson</em> on Kindle and read it exclusively in trains. Completing it was a massive achievement for me then :)</p>
 
-<p><img src="http://localhost:4000/assets/sf_allhands_0.jpg" alt="sf_allhands0" class="center-image" /></p>
+<p>Since that, I have read 3 other books, and each of them has positively impacted my life. Reading non-fiction is a very efficient way to enrich yourself because some person in the past decided to distil his thoughts about the exact questions you’re asking and put them in writing in a way that’s easy to understand. That is a treasure trove of knowledge, and my goal is to find more experiences that challenge your current model of the world and force you to take account.</p>
 
-<p>This is the team pic we clicked at the Conservatory of Flowers
-<img src="http://localhost:4000/assets/sf_allhands_1.jpg" alt="sf_allhands1" class="center-image" /></p>
+<p>On a completely different note, I have also struggled with hair loss for about 4 years now. I finally took the plunge and shaved my head after a lot of support from my close friends. It is fascinating how much we worry about things that we can’t control. For a long time, I had struggled with low self-confidence due to this and my weight, and I wanted to change that. Going into 2020, I had two options - be a <em>fit bald man</em> or a <em>fat bald man.</em> The choice was obvious.</p>
 
-<p>Towards the end, we got to know that Jonas was leaving the company (he got an offer from a tech company which started as a PhD project). <a href="https://mozillians.org/en-US/u/bstack/">Brian</a> will now be my mentor for the rest of the project. In the next video conference, we had to get him up to speed with what had been done and what was next so that I could complete my project on time.</p>
+<h2 id="2020">2020</h2>
 
-<h2 id="work-on-src">Work on src/</h2>
+<p>Throughout this year, I have been focused on improving my fitness by home bodyweight workouts and being watchful about what I eat. Many YouTube videos later, I have lost 11kgs this year, and it has made a huge difference in my life. The mental satisfaction after pushing yourself and completing a workout exactly as you had planned is very addictive.</p>
 
-<p>I completed the function for input validation to make sure we do not send badly formatted requests to the Pulse server, and all cases of bad input are resolved by events itself.</p>
+<p>I also realized that I actually enjoy eating healthy and that helps me try new eating habits. I like to experiment with my body and learn by observing the effects. Hope to do that a lot more in the next year.</p>
 
-<p>Another problem I discovered was that the <a href="https://www.w3.org/TR/2009/WD-eventsource-20090421/#eventsource"><code class="highlighter-rouge">EventSource</code></a> client tries to reconnect automatically everytime the connection is closed by the server. We want to avoid such unnecessary requests. It also sets a <code class="highlighter-rouge">Last-Event-Id</code> header which we can exploit. So every event had id <code class="highlighter-rouge">-</code>, and on every new connection if the <code class="highlighter-rouge">Last-Event-Id</code> header is set to <code class="highlighter-rouge">-</code> , we report an error and close the connection, thus saving resources.</p>
+<p>Forming a habit is tough because it needs consistency. What I have learnt is that</p>
 
-<h2 id="work-on-testing">Work on testing</h2>
+<blockquote>
+  <p>Regularity is rewarded much more in the long term than your immediate skill</p>
+</blockquote>
 
-<p>The biggest outcome of these two weeks was I had a somewhat stable <a href="https://www.npmjs.com/package/mocha"><code class="highlighter-rouge">mocha</code></a> testing framework. A significant part of the latter week was spent in making sure making the code more reusable so that new tests do not have a lot of copied code. I no longer have to run the server on one bash instance and my client on another. Also wrote a few tests for checking input validation, invalid exchanges and successful connections.</p>
+<p>and regularity is not possible if you don’t love what you are doing. It’s important to enjoy every part as it keeps you motivated. Focusing on one thing at a time, that is losing weight, has helped me improve in other areas of life too. I will try to write on these in another post soon.</p>
 
-<h2 id="finally-deployed-somewhere">Finally deployed somewhere</h2>
+<p>One of the biggest realizations from this year would be that I can learn anything I want to as long as I am willing to put in the effort and time.</p>
 
-<p>Jonas set me up with a heroku staging environment at <code class="highlighter-rouge">https://taskcluster-events-staging.herokuapp.com/</code> under the mozillacorporation account. And I was quick to deploy. This also helped him and others to test my changes quickly and easily.</p>
+<h2 id="the-next">The next</h2>
 
-<h2 id="whats-ahead">What’s Ahead</h2>
+<p>It’s gonna be fun, and I’m excited. At the start of the year, I had not imagined that I would be writing this, especially after 2 years of writing nothing. I plan to do more of this. Putting your thoughts into words helps solidify them, find mistakes in arguments and opens you up to different viewpoints which only develops your thinking. So beginning today, I want to write “2 crappy pages” a week. I don’t have a specific theme; it will just be an account of everything floating in my head.</p>
 
-<p>The next task is to get this PR merged. Next thing is to upgrade to use fake listening( more on it next week). Then I will start working on the client implementation that is <a href="tools.taskcluster.net/pulse-inspector">pulse-inspector</a> in <a href="http://github.com/taskcluster/taskcluster-tools">‘tc-tools’</a>. That will then leave me with getting this deployed to <code class="highlighter-rouge">events.taskcluster.net</code>. Till then…</p>
-
+<p>I also want to double down on my reading, as that routine got hampered by the placements this year. Looking forward, I am excited to just keep improving myself and be open to being influenced by different people and events.  Let’s see how it goes, onwards and upwards :)</p>
 
   </div>
 
@@ -131,8 +131,8 @@
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = 'http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html';
-      this.page.identifier = 'http://localhost:4000/2018/06/23/gsoc-week-5-and-6.html';
+      this.page.url = 'http://localhost:4000/2020/12/31/the-past-year-and-half.html';
+      this.page.identifier = 'http://localhost:4000/2020/12/31/the-past-year-and-half.html';
     };
 
     (function() {

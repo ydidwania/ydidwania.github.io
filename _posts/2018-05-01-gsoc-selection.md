@@ -2,6 +2,7 @@
 layout: post
 title:  "GSoC Selection"
 date:   2018-05-01 13:45:53 +0530
+comments: true
 
 ---
 ![gsoc]({{site.url}}/assets/gsoc_cover.png "Google Summer of Code"){: .center-image}

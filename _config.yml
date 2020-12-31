@@ -26,6 +26,8 @@ linkedin_username: yashvardhan-didwania-194575160
 github_username: ydidwania
 # facebook_username: ydidwania
 repoLink: "https://github.com/ydidwania/ydidwania.github.io"
+disqus:
+  shortname: ydidwania
 # Build settings
 markdown: kramdown
 plugins:
